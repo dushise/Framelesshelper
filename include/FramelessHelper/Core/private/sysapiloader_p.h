@@ -60,16 +60,16 @@ private:
 FRAMELESSHELPER_END_NAMESPACE
 
 #define API_AVAILABLE(lib, func) \
-  (FRAMELESSHELPER_PREPEND_NAMESPACE(SysApiLoader)::instance()->isAvailable(k##lib, k##func))
+  (PMSoft::SysApiLoader::instance()->isAvailable(k##lib, k##func))
 
 #define API_CALL_FUNCTION(lib, func, ...) \
-  ((FRAMELESSHELPER_PREPEND_NAMESPACE(SysApiLoader)::instance()->get<decltype(&func)>(k##lib, k##func))(__VA_ARGS__))
+  ((PMSoft::SysApiLoader::instance()->get<decltype(&func)>(k##lib, k##func))(__VA_ARGS__))
 
 #define API_CALL_FUNCTION2(lib, func, type, ...) \
-  ((FRAMELESSHELPER_PREPEND_NAMESPACE(SysApiLoader)::instance()->get<type>(k##lib, k##func))(__VA_ARGS__))
+  ((PMSoft::SysApiLoader::instance()->get<type>(k##lib, k##func))(__VA_ARGS__))
 
 #define API_CALL_FUNCTION3(lib, func, name, ...) \
-  ((FRAMELESSHELPER_PREPEND_NAMESPACE(SysApiLoader)::instance()->get<decltype(&func)>(k##lib, k##name))(__VA_ARGS__))
+  ((PMSoft::SysApiLoader::instance()->get<decltype(&func)>(k##lib, k##name))(__VA_ARGS__))
 
 #define API_CALL_FUNCTION4(lib, func, ...) API_CALL_FUNCTION3(lib, _##func, func, __VA_ARGS__)
 

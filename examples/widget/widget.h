@@ -39,7 +39,7 @@ class StandardTitleBar;
 FRAMELESSHELPER_END_NAMESPACE
 #endif
 
-class Widget : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
+class Widget : public PMSoft::FramelessWidget
 {
     Q_OBJECT
     Q_DISABLE_COPY(Widget)
@@ -62,7 +62,7 @@ private Q_SLOTS:
 
 private:
 #if FRAMELESSHELPER_CONFIG(titlebar)
-    FRAMELESSHELPER_PREPEND_NAMESPACE(StandardTitleBar) *m_titleBar = nullptr;
+    PMSoft::StandardTitleBar *m_titleBar = nullptr;
 #endif
     QLabel *m_clockLabel = nullptr;
     QLabel *m_compilerInfoLabel = nullptr;

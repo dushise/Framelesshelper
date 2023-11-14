@@ -22,7 +22,7 @@ class StandardTitleBar;
 FRAMELESSHELPER_END_NAMESPACE
 #endif
 
-class Dialog : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessDialog)
+class Dialog : public PMSoft::FramelessDialog
 {
     Q_OBJECT
     Q_DISABLE_COPY(Dialog)
@@ -41,7 +41,7 @@ private:
 
 private:
 #if FRAMELESSHELPER_CONFIG(titlebar)
-    FRAMELESSHELPER_PREPEND_NAMESPACE(StandardTitleBar) *titleBar = nullptr;
+    PMSoft::StandardTitleBar *titleBar = nullptr;
 #endif
     QLabel *label = nullptr;
     QLineEdit *lineEdit = nullptr;

@@ -39,7 +39,7 @@ namespace Ui
 class MainWindow;
 }
 
-class MainWindow : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessMainWindow)
+class MainWindow : public PMSoft::FramelessMainWindow
 {
     Q_OBJECT
     Q_DISABLE_COPY(MainWindow)
@@ -58,7 +58,7 @@ private:
 
 private:
 #if FRAMELESSHELPER_CONFIG(titlebar)
-    FRAMELESSHELPER_PREPEND_NAMESPACE(StandardTitleBar) *m_titleBar = nullptr;
+    PMSoft::StandardTitleBar *m_titleBar = nullptr;
 #endif
     Ui::MainWindow *m_mainWindow = nullptr;
 };
