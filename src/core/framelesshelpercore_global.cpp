@@ -32,7 +32,7 @@
 
 #ifndef QT_NO_DEBUG_STREAM
 QT_BEGIN_NAMESPACE
-QDebug operator<<(QDebug d, const FRAMELESSHELPER_PREPEND_NAMESPACE(VersionNumber) &ver)
+QDebug operator<<(QDebug d, const PMSoft::VersionNumber &ver)
 {
     const QDebugStateSaver saver(d);
     d.nospace().noquote() << "VersionNumber("
@@ -43,12 +43,12 @@ QDebug operator<<(QDebug d, const FRAMELESSHELPER_PREPEND_NAMESPACE(VersionNumbe
     return d;
 }
 
-QDebug operator<<(QDebug d, const FRAMELESSHELPER_PREPEND_NAMESPACE(Global)::VersionInfo &ver)
+QDebug operator<<(QDebug d, const PMSoft::Global::VersionInfo &ver)
 {
     const QDebugStateSaver saver(d);
     unsigned long major = 0, minor = 0, patch = 0;
     FRAMELESSHELPER_EXTRACT_VERSION(ver.version.num, major, minor, patch)
-    const auto ver_num = FRAMELESSHELPER_PREPEND_NAMESPACE(VersionNumber){ major, minor, patch };
+    const auto ver_num = PMSoft::VersionNumber{ major, minor, patch };
     d.nospace().noquote() << "VersionInfo("
                           << "version number: " << ver_num << ", "
                           << "version string: " << ver.version.str << ", "
@@ -69,10 +69,10 @@ QDebug operator<<(QDebug d, const FRAMELESSHELPER_PREPEND_NAMESPACE(Global)::Ver
     return d;
 }
 
-QDebug operator<<(QDebug d, const FRAMELESSHELPER_PREPEND_NAMESPACE(Global)::Dpi &dpi)
+QDebug operator<<(QDebug d, const PMSoft::Global::Dpi &dpi)
 {
     const QDebugStateSaver saver(d);
-    const qreal scaleFactor = (qreal(dpi.x) / qreal(FRAMELESSHELPER_PREPEND_NAMESPACE(Utils)::defaultScreenDpi()));
+    const qreal scaleFactor = (qreal(dpi.x) / qreal(PMSoft::Utils::defaultScreenDpi()));
     d.nospace().noquote() << "Dpi("
                           << "x: " << dpi.x << ", "
                           << "y: " << dpi.y << ", "

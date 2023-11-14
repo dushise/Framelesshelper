@@ -236,10 +236,6 @@ QT_END_NAMESPACE
 #  define FRAMELESSHELPER_USE_NAMESPACE using namespace PMSoft;
 #endif
 
-#ifndef FRAMELESSHELPER_PREPEND_NAMESPACE
-#  define FRAMELESSHELPER_PREPEND_NAMESPACE(X) ::PMSoft::X
-#endif
-
 #ifndef FRAMELESSHELPER_MAKE_VERSION
 #  define FRAMELESSHELPER_MAKE_VERSION(Major, Minor, Patch) \
      ((((Major) & 0xff) << 24) | (((Minor) & 0xff) << 16) | (((Patch) & 0xff) << 8))
@@ -662,7 +658,7 @@ FRAMELESSHELPER_END_NAMESPACE
 
 #ifndef QT_NO_DEBUG_STREAM
 QT_BEGIN_NAMESPACE
-FRAMELESSHELPER_CORE_API QDebug operator<<(QDebug, const FRAMELESSHELPER_PREPEND_NAMESPACE(Global)::VersionInfo &);
-FRAMELESSHELPER_CORE_API QDebug operator<<(QDebug, const FRAMELESSHELPER_PREPEND_NAMESPACE(Global)::Dpi &);
+FRAMELESSHELPER_CORE_API QDebug operator<<(QDebug, const PMSoft::Global::VersionInfo &);
+FRAMELESSHELPER_CORE_API QDebug operator<<(QDebug, const PMSoft::Global::Dpi &);
 QT_END_NAMESPACE
 #endif // QT_NO_DEBUG_STREAM
