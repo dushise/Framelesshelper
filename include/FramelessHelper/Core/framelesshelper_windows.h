@@ -1384,103 +1384,103 @@ _AdjustWindowRectExForDpi2(
 
 EXTERN_C_END
 
-[[maybe_unused]] inline constexpr const unsigned char kAutoHideTaskBarThickness = 2; // The thickness of an auto-hide taskbar in pixels.
-[[maybe_unused]] inline constexpr const wchar_t kDwmRegistryKey[] = LR"(Software\Microsoft\Windows\DWM)";
-[[maybe_unused]] inline constexpr const wchar_t kPersonalizeRegistryKey[] = LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)";
-[[maybe_unused]] inline constexpr const wchar_t kThemeSettingChangeEventName[] = L"ImmersiveColorSet";
-[[maybe_unused]] inline constexpr const wchar_t kDwmColorKeyName[] = L"ColorPrevalence";
-[[maybe_unused]] inline constexpr const wchar_t kSystemDarkThemeResourceName[] = L"DarkMode_Explorer";
-[[maybe_unused]] inline constexpr const wchar_t kSystemLightThemeResourceName[] = L"Explorer";
-[[maybe_unused]] inline constexpr const wchar_t kDesktopRegistryKey[] = LR"(Control Panel\Desktop)";
-[[maybe_unused]] inline constexpr const wchar_t kDarkModePropertyName[] = L"UseImmersiveDarkModeColors";
+inline constexpr const unsigned char kAutoHideTaskBarThickness = 2; // The thickness of an auto-hide taskbar in pixels.
+inline constexpr const wchar_t kDwmRegistryKey[] = LR"(Software\Microsoft\Windows\DWM)";
+inline constexpr const wchar_t kPersonalizeRegistryKey[] = LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)";
+inline constexpr const wchar_t kThemeSettingChangeEventName[] = L"ImmersiveColorSet";
+inline constexpr const wchar_t kDwmColorKeyName[] = L"ColorPrevalence";
+inline constexpr const wchar_t kSystemDarkThemeResourceName[] = L"DarkMode_Explorer";
+inline constexpr const wchar_t kSystemLightThemeResourceName[] = L"Explorer";
+inline constexpr const wchar_t kDesktopRegistryKey[] = LR"(Control Panel\Desktop)";
+inline constexpr const wchar_t kDarkModePropertyName[] = L"UseImmersiveDarkModeColors";
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator==(const POINT &lhs, const POINT &rhs) noexcept
+inline constexpr bool operator==(const POINT &lhs, const POINT &rhs) noexcept
 {
     return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator!=(const POINT &lhs, const POINT &rhs) noexcept
+inline constexpr bool operator!=(const POINT &lhs, const POINT &rhs) noexcept
 {
     return !operator==(lhs, rhs);
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator==(const SIZE &lhs, const SIZE &rhs) noexcept
+inline constexpr bool operator==(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return ((lhs.cx == rhs.cx) && (lhs.cy == rhs.cy));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator!=(const SIZE &lhs, const SIZE &rhs) noexcept
+inline constexpr bool operator!=(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return !operator==(lhs, rhs);
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator>(const SIZE &lhs, const SIZE &rhs) noexcept
+inline constexpr bool operator>(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return ((lhs.cx * lhs.cy) > (rhs.cx * rhs.cy));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator>=(const SIZE &lhs, const SIZE &rhs) noexcept
+inline constexpr bool operator>=(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return (operator>(lhs, rhs) || operator==(lhs, rhs));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator<(const SIZE &lhs, const SIZE &rhs) noexcept
+inline constexpr bool operator<(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator<=(const SIZE &lhs, const SIZE &rhs) noexcept
+inline constexpr bool operator<=(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return (operator<(lhs, rhs) || operator==(lhs, rhs));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator==(const RECT &lhs, const RECT &rhs) noexcept
+inline constexpr bool operator==(const RECT &lhs, const RECT &rhs) noexcept
 {
     return ((lhs.left == rhs.left) && (lhs.top == rhs.top) && (lhs.right == rhs.right) && (lhs.bottom == rhs.bottom));
 }
 
-[[maybe_unused]] [[nodiscard]] inline constexpr bool operator!=(const RECT &lhs, const RECT &rhs) noexcept
+inline constexpr bool operator!=(const RECT &lhs, const RECT &rhs) noexcept
 {
     return !operator==(lhs, rhs);
 }
 
-[[nodiscard]] inline constexpr QPoint point2qpoint(const POINT &point)
+inline constexpr QPoint point2qpoint(const POINT &point)
 {
     return QPoint{ int(point.x), int(point.y) };
 }
 
-[[nodiscard]] inline constexpr POINT qpoint2point(const QPoint &point)
+inline constexpr POINT qpoint2point(const QPoint &point)
 {
     return POINT{ LONG(point.x()), LONG(point.y()) };
 }
 
-[[nodiscard]] inline constexpr QSize size2qsize(const SIZE &size)
+inline constexpr QSize size2qsize(const SIZE &size)
 {
     return QSize{ int(size.cx), int(size.cy) };
 }
 
-[[nodiscard]] inline constexpr SIZE qsize2size(const QSize &size)
+inline constexpr SIZE qsize2size(const QSize &size)
 {
     return SIZE{ LONG(size.width()), LONG(size.height()) };
 }
 
-[[nodiscard]] inline constexpr QRect rect2qrect(const RECT &rect)
+inline constexpr QRect rect2qrect(const RECT &rect)
 {
     return QRect{ QPoint{ int(rect.left), int(rect.top) }, QSize{ int(RECT_WIDTH(rect)), int(RECT_HEIGHT(rect)) } };
 }
 
-[[nodiscard]] inline constexpr RECT qrect2rect(const QRect &qrect)
+inline constexpr RECT qrect2rect(const QRect &qrect)
 {
     return RECT{ LONG(qrect.left()), LONG(qrect.top()), LONG(qrect.right()), LONG(qrect.bottom()) };
 }
 
-[[nodiscard]] inline /*constexpr*/ QString hwnd2str(const WId windowId)
+inline /*constexpr*/ QString hwnd2str(const WId windowId)
 {
     // NULL handle is allowed here.
     return FRAMELESSHELPER_STRING_LITERAL("0x") + QString::number(windowId, 16).toUpper().rightJustified(8, u'0');
 }
 
-[[nodiscard]] inline /*constexpr*/ QString hwnd2str(const HWND hwnd)
+inline /*constexpr*/ QString hwnd2str(const HWND hwnd)
 {
     // NULL handle is allowed here.
     return hwnd2str(reinterpret_cast<WId>(hwnd));

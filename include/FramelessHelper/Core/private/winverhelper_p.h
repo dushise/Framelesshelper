@@ -33,7 +33,7 @@ FRAMELESSHELPER_BEGIN_NAMESPACE
 namespace WindowsVersionHelper
 {
 
-#define DECL(Name) [[nodiscard]] FRAMELESSHELPER_CORE_API bool isWin##Name##OrGreater();
+#define DECL(Name) FRAMELESSHELPER_CORE_API bool isWin##Name##OrGreater();
 
 DECL(2K)
 DECL(XP)

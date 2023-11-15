@@ -208,12 +208,12 @@ QT_END_NAMESPACE
 
 #ifndef FRAMELESSHELPER_BYTEARRAY_CONSTANT2
 #  define FRAMELESSHELPER_BYTEARRAY_CONSTANT2(name, ba) \
-     [[maybe_unused]] static constexpr const auto k##name = FRAMELESSHELPER_BYTEARRAY(ba);
+     static constexpr const auto k##name = FRAMELESSHELPER_BYTEARRAY(ba);
 #endif
 
 #ifndef FRAMELESSHELPER_STRING_CONSTANT2
 #  define FRAMELESSHELPER_STRING_CONSTANT2(name, str) \
-     [[maybe_unused]] static Q_STRING_CONSTEXPR const auto k##name = FRAMELESSHELPER_STRING(str);
+     static Q_STRING_CONSTEXPR const auto k##name = FRAMELESSHELPER_STRING(str);
 #endif
 
 #ifndef FRAMELESSHELPER_BYTEARRAY_CONSTANT
@@ -349,19 +349,19 @@ namespace Global
 
 Q_NAMESPACE_EXPORT(FRAMELESSHELPER_CORE_API)
 
-[[maybe_unused]] inline constexpr const int kDefaultResizeBorderThickness = 8;
-[[maybe_unused]] inline constexpr const int kDefaultCaptionHeight = 23;
-[[maybe_unused]] inline constexpr const int kDefaultTitleBarHeight = 32;
-[[maybe_unused]] inline constexpr const int kDefaultExtendedTitleBarHeight = 48;
-[[maybe_unused]] inline constexpr const int kDefaultWindowFrameBorderThickness = 1;
-[[maybe_unused]] inline constexpr const int kDefaultTitleBarFontPointSize = 11;
-[[maybe_unused]] inline constexpr const int kDefaultTitleBarContentsMargin = 10;
-[[maybe_unused]] inline constexpr const int kMacOSChromeButtonAreaWidth = 60;
-[[maybe_unused]] inline constexpr const QSize kDefaultWindowIconSize = {16, 16};
+inline constexpr const int kDefaultResizeBorderThickness = 8;
+inline constexpr const int kDefaultCaptionHeight = 23;
+inline constexpr const int kDefaultTitleBarHeight = 32;
+inline constexpr const int kDefaultExtendedTitleBarHeight = 48;
+inline constexpr const int kDefaultWindowFrameBorderThickness = 1;
+inline constexpr const int kDefaultTitleBarFontPointSize = 11;
+inline constexpr const int kDefaultTitleBarContentsMargin = 10;
+inline constexpr const int kMacOSChromeButtonAreaWidth = 60;
+inline constexpr const QSize kDefaultWindowIconSize = {16, 16};
 // We have to use "qRound()" here because "std::round()" is not constexpr, yet.
-[[maybe_unused]] inline constexpr const QSize kDefaultSystemButtonSize = {qRound(qreal(kDefaultTitleBarHeight) * 1.5), kDefaultTitleBarHeight};
-[[maybe_unused]] inline constexpr const QSize kDefaultSystemButtonIconSize = kDefaultWindowIconSize;
-[[maybe_unused]] inline constexpr const QSize kDefaultWindowSize = {160, 160}; // Value taken from Windows QPA.
+inline constexpr const QSize kDefaultSystemButtonSize = {qRound(qreal(kDefaultTitleBarHeight) * 1.5), kDefaultTitleBarHeight};
+inline constexpr const QSize kDefaultSystemButtonIconSize = kDefaultWindowIconSize;
+inline constexpr const QSize kDefaultWindowSize = {160, 160}; // Value taken from Windows QPA.
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 #  define kDefaultWhiteColor QColorConstants::White
@@ -370,37 +370,37 @@ Q_NAMESPACE_EXPORT(FRAMELESSHELPER_CORE_API)
 #  define kDefaultLightGrayColor QColorConstants::LightGray
 #  define kDefaultDarkGrayColor QColorConstants::DarkGray
 #else // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-   [[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultWhiteColor = {255, 255, 255}; // #FFFFFF
-   [[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultBlackColor = {0, 0, 0}; // #000000
-   [[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultTransparentColor = {0, 0, 0, 0};
-   [[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultLightGrayColor = {211, 211, 211}; // #D3D3D3
-   [[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultDarkGrayColor = {169, 169, 169}; // #A9A9A9
+   inline Q_COLOR_CONSTEXPR const QColor kDefaultWhiteColor = {255, 255, 255}; // #FFFFFF
+   inline Q_COLOR_CONSTEXPR const QColor kDefaultBlackColor = {0, 0, 0}; // #000000
+   inline Q_COLOR_CONSTEXPR const QColor kDefaultTransparentColor = {0, 0, 0, 0};
+   inline Q_COLOR_CONSTEXPR const QColor kDefaultLightGrayColor = {211, 211, 211}; // #D3D3D3
+   inline Q_COLOR_CONSTEXPR const QColor kDefaultDarkGrayColor = {169, 169, 169}; // #A9A9A9
 #endif // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor = {240, 240, 240}; // #F0F0F0
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemDarkColor = {32, 32, 32}; // #202020
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorLight = {110, 110, 110}; // #6E6E6E
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorDark = {51, 51, 51}; // #333333
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorLight = {167, 167, 167}; // #A7A7A7
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorDark = {61, 61, 62}; // #3D3D3E
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemButtonBackgroundColor = {204, 204, 204}; // #CCCCCC
-[[maybe_unused]] inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemCloseButtonBackgroundColor = {232, 17, 35}; // #E81123
+inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor = {240, 240, 240}; // #F0F0F0
+inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemDarkColor = {32, 32, 32}; // #202020
+inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorLight = {110, 110, 110}; // #6E6E6E
+inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorDark = {51, 51, 51}; // #333333
+inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorLight = {167, 167, 167}; // #A7A7A7
+inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorDark = {61, 61, 62}; // #3D3D3E
+inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemButtonBackgroundColor = {204, 204, 204}; // #CCCCCC
+inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemCloseButtonBackgroundColor = {232, 17, 35}; // #E81123
 
-[[maybe_unused]] inline constexpr const char kDontOverrideCursorVar[] = "FRAMELESSHELPER_DONT_OVERRIDE_CURSOR";
-[[maybe_unused]] inline constexpr const char kDontToggleMaximizeVar[] = "FRAMELESSHELPER_DONT_TOGGLE_MAXIMIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuDisableMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MOVE";
-[[maybe_unused]] inline constexpr const char kSysMenuDisableSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_SIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuDisableMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MINIMIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuDisableMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MAXIMIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuDisableRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_RESTORE";
-[[maybe_unused]] inline constexpr const char kSysMenuDisableCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_CLOSE";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MOVE";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MINIMIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MAXIMIZE";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_RESTORE";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveSeparatorVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SEPARATOR";
-[[maybe_unused]] inline constexpr const char kSysMenuRemoveCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_CLOSE";
+inline constexpr const char kDontOverrideCursorVar[] = "FRAMELESSHELPER_DONT_OVERRIDE_CURSOR";
+inline constexpr const char kDontToggleMaximizeVar[] = "FRAMELESSHELPER_DONT_TOGGLE_MAXIMIZE";
+inline constexpr const char kSysMenuDisableMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MOVE";
+inline constexpr const char kSysMenuDisableSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_SIZE";
+inline constexpr const char kSysMenuDisableMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MINIMIZE";
+inline constexpr const char kSysMenuDisableMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MAXIMIZE";
+inline constexpr const char kSysMenuDisableRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_RESTORE";
+inline constexpr const char kSysMenuDisableCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_CLOSE";
+inline constexpr const char kSysMenuRemoveMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MOVE";
+inline constexpr const char kSysMenuRemoveSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SIZE";
+inline constexpr const char kSysMenuRemoveMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MINIMIZE";
+inline constexpr const char kSysMenuRemoveMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MAXIMIZE";
+inline constexpr const char kSysMenuRemoveRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_RESTORE";
+inline constexpr const char kSysMenuRemoveSeparatorVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SEPARATOR";
+inline constexpr const char kSysMenuRemoveCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_CLOSE";
 
 enum class Option : quint8
 {
@@ -606,32 +606,32 @@ struct Dpi
     quint32 x = 0;
     quint32 y = 0;
 
-    [[nodiscard]] friend constexpr bool operator==(const Dpi &lhs, const Dpi &rhs) noexcept
+    friend constexpr bool operator==(const Dpi &lhs, const Dpi &rhs) noexcept
     {
         return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
     }
 
-    [[nodiscard]] friend constexpr bool operator!=(const Dpi &lhs, const Dpi &rhs) noexcept
+    friend constexpr bool operator!=(const Dpi &lhs, const Dpi &rhs) noexcept
     {
         return !operator==(lhs, rhs);
     }
 
-    [[nodiscard]] friend constexpr bool operator>(const Dpi &lhs, const Dpi &rhs) noexcept
+    friend constexpr bool operator>(const Dpi &lhs, const Dpi &rhs) noexcept
     {
         return ((lhs.x * lhs.y) > (rhs.x * rhs.y));
     }
 
-    [[nodiscard]] friend constexpr bool operator>=(const Dpi &lhs, const Dpi &rhs) noexcept
+    friend constexpr bool operator>=(const Dpi &lhs, const Dpi &rhs) noexcept
     {
         return (operator>(lhs, rhs) || operator==(lhs, rhs));
     }
 
-    [[nodiscard]] friend constexpr bool operator<(const Dpi &lhs, const Dpi &rhs) noexcept
+    friend constexpr bool operator<(const Dpi &lhs, const Dpi &rhs) noexcept
     {
         return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
     }
 
-    [[nodiscard]] friend constexpr bool operator<=(const Dpi &lhs, const Dpi &rhs) noexcept
+    friend constexpr bool operator<=(const Dpi &lhs, const Dpi &rhs) noexcept
     {
         return (operator<(lhs, rhs) || operator==(lhs, rhs));
     }
@@ -641,7 +641,7 @@ struct Dpi
 
 FRAMELESSHELPER_CORE_API void FramelessHelperCoreInitialize();
 FRAMELESSHELPER_CORE_API void FramelessHelperCoreUninitialize();
-[[nodiscard]] FRAMELESSHELPER_CORE_API Global::VersionInfo FramelessHelperVersion();
+FRAMELESSHELPER_CORE_API Global::VersionInfo FramelessHelperVersion();
 FRAMELESSHELPER_CORE_API void FramelessHelperEnableThemeAware();
 FRAMELESSHELPER_CORE_API void FramelessHelperPrintLogo();
 
@@ -649,7 +649,7 @@ namespace FramelessHelper::Core
 {
 inline void initialize() { FramelessHelperCoreInitialize(); }
 inline void uninitialize() { FramelessHelperCoreUninitialize(); }
-[[nodiscard]] inline Global::VersionInfo version() { return FramelessHelperVersion(); }
+inline Global::VersionInfo version() { return FramelessHelperVersion(); }
 inline void setApplicationOSThemeAware() { FramelessHelperEnableThemeAware(); }
 inline void outputLogo() { FramelessHelperPrintLogo(); }
 } // namespace FramelessHelper::Core

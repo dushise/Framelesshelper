@@ -51,7 +51,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcMicaMaterial, "wangwenx190.framelesshelper.core.micamaterial")
+static Q_LOGGING_CATEGORY(lcMicaMaterial, "wangwenx190.framelesshelper.core.micamaterial")
 #  define INFO qCInfo(lcMicaMaterial)
 #  define DEBUG qCDebug(lcMicaMaterial)
 #  define WARNING qCWarning(lcMicaMaterial)
@@ -65,17 +65,17 @@ FRAMELESSHELPER_BEGIN_NAMESPACE
 
 using namespace Global;
 
-[[maybe_unused]] static constexpr const QSize kMaximumPictureSize = { 1920, 1080 };
-[[maybe_unused]] static constexpr const QImage::Format kDefaultImageFormat = QImage::Format_ARGB32_Premultiplied;
+static constexpr const QSize kMaximumPictureSize = { 1920, 1080 };
+static constexpr const QImage::Format kDefaultImageFormat = QImage::Format_ARGB32_Premultiplied;
 
-[[maybe_unused]] static constexpr const qreal kDefaultTintOpacity = 0.7;
-[[maybe_unused]] static constexpr const qreal kDefaultNoiseOpacity = 0.04;
-[[maybe_unused]] static constexpr const qreal kDefaultBlurRadius = 128.0;
+static constexpr const qreal kDefaultTintOpacity = 0.7;
+static constexpr const qreal kDefaultNoiseOpacity = 0.04;
+static constexpr const qreal kDefaultBlurRadius = 128.0;
 
-[[maybe_unused]] static Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor2 = {243, 243, 243}; // #F3F3F3
+static Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor2 = {243, 243, 243}; // #F3F3F3
 
-[[maybe_unused]] static Q_COLOR_CONSTEXPR const QColor kDefaultFallbackColorDark = {44, 44, 44}; // #2C2C2C
-[[maybe_unused]] static Q_COLOR_CONSTEXPR const QColor kDefaultFallbackColorLight = {249, 249, 249}; // #F9F9F9
+static Q_COLOR_CONSTEXPR const QColor kDefaultFallbackColorDark = {44, 44, 44}; // #2C2C2C
+static Q_COLOR_CONSTEXPR const QColor kDefaultFallbackColorLight = {249, 249, 249}; // #F9F9F9
 
 struct ImageData
 {
@@ -90,7 +90,7 @@ Q_GLOBAL_STATIC(ImageData, g_imageData)
 
 #if FRAMELESSHELPER_CONFIG(private_qt)
 template<const int shift>
-[[nodiscard]] static inline constexpr int qt_static_shift(const int value)
+static inline constexpr int qt_static_shift(const int value)
 {
     if constexpr (shift == 0) {
         return value;
@@ -285,7 +285,7 @@ static inline void expblur(QImage &img, qreal radius, const bool improvedQuality
 #define AVG(a,b)  ( ((((a)^(b)) & 0xfefefefeUL) >> 1) + ((a)&(b)) )
 #define AVG16(a,b)  ( ((((a)^(b)) & 0xf7deUL) >> 1) + ((a)&(b)) )
 
-[[nodiscard]] static inline QImage qt_halfScaled(const QImage &source)
+static inline QImage qt_halfScaled(const QImage &source)
 {
     if ((source.width() < 2) || (source.height() < 2)) {
         return {};
@@ -381,7 +381,7 @@ static inline void expblur(QImage &img, qreal radius, const bool improvedQuality
     return dest;
 }
 
-[[maybe_unused]] static inline void qt_blurImage(QPainter *p, QImage &blurImage,
+static inline void qt_blurImage(QPainter *p, QImage &blurImage,
     qreal radius, const bool quality, const bool alphaOnly, const int transposed = 0)
 {
     if ((blurImage.format() != kDefaultImageFormat)
@@ -419,7 +419,7 @@ static inline void expblur(QImage &img, qreal radius, const bool improvedQuality
     }
 }
 
-[[maybe_unused]] static inline void qt_blurImage(QImage &blurImage,
+static inline void qt_blurImage(QImage &blurImage,
     const qreal radius, const bool quality, const int transposed = 0)
 {
     if ((blurImage.format() == QImage::Format_Indexed8)
@@ -442,7 +442,7 @@ static inline void expblur(QImage &img, qreal radius, const bool improvedQuality
 
     \sa QWidget::layoutDirection
 */
-[[nodiscard]] static inline Qt::Alignment visualAlignment
+static inline Qt::Alignment visualAlignment
     (const Qt::LayoutDirection direction, Qt::Alignment alignment)
 {
     if (!(alignment & Qt::AlignHorizontal_Mask)) {
@@ -461,7 +461,7 @@ static inline void expblur(QImage &img, qreal radius, const bool improvedQuality
     Returns a new rectangle of the specified \a size that is aligned to the given
     \a rectangle according to the specified \a alignment and \a direction.
  */
-[[nodiscard]] static inline QRect alignedRect(const Qt::LayoutDirection direction,
+static inline QRect alignedRect(const Qt::LayoutDirection direction,
     Qt::Alignment alignment, const QSize &size, const QRect &rectangle)
 {
     alignment = visualAlignment(direction, alignment);

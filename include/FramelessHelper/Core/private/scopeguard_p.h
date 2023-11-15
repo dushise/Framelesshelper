@@ -35,7 +35,7 @@ FRAMELESSHELPER_BEGIN_NAMESPACE
 
 using ScopeGuardCallback = std::function<void()>;
 
-class [[nodiscard]] ScopeGuard
+class ScopeGuard
 {
     FRAMELESSHELPER_CLASS(ScopeGuard)
 
@@ -75,7 +75,7 @@ public:
         }
     }
 
-    [[nodiscard]] ScopeGuardCallback callback() const
+    ScopeGuardCallback callback() const
     {
         return m_callback;
     }
@@ -90,7 +90,7 @@ private:
     ScopeGuardCallback m_callback = nullptr;
 };
 
-[[nodiscard]] inline ScopeGuard make_guard(ScopeGuardCallback &&cb)
+inline ScopeGuard make_guard(ScopeGuardCallback &&cb)
 {
     return ScopeGuard(cb);
 }

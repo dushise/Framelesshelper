@@ -100,7 +100,7 @@ struct FRAMELESSHELPER_CORE_API FramelessCallbacks
     virtual ~FramelessCallbacks();
 
     using PtrType = std::shared_ptr<FramelessCallbacks>;
-    [[nodiscard]] static PtrType create();
+    static PtrType create();
 
 private:
     FRAMELESSHELPER_CLASS(FramelessCallbacks)
@@ -149,7 +149,7 @@ struct FRAMELESSHELPER_CORE_API FramelessData
     virtual ~FramelessData();
 
     using PtrType = std::shared_ptr<FramelessData>;
-    [[nodiscard]] static PtrType create();
+    static PtrType create();
 
 private:
     FRAMELESSHELPER_CLASS(FramelessData)
@@ -161,19 +161,19 @@ using FramelessDataHash = QHash<QObject *, FramelessDataPtr>;
 FRAMELESSHELPER_END_NAMESPACE
 
 #define DECLARE_SIZE_COMPARE_OPERATORS(Type1, Type2) \
-  [[maybe_unused]] [[nodiscard]] inline constexpr bool operator>(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline constexpr bool operator>(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return ((lhs.width() * lhs.height()) > (rhs.width() * rhs.height())); \
   } \
-  [[maybe_unused]] [[nodiscard]] inline constexpr bool operator>=(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline constexpr bool operator>=(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return (operator>(lhs, rhs) || operator==(lhs, rhs)); \
   } \
-  [[maybe_unused]] [[nodiscard]] inline constexpr bool operator<(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline constexpr bool operator<(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return (operator!=(lhs, rhs) && !operator>(lhs, rhs)); \
   } \
-  [[maybe_unused]] [[nodiscard]] inline constexpr bool operator<=(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline constexpr bool operator<=(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return (operator<(lhs, rhs) || operator==(lhs, rhs)); \
   }

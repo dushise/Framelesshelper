@@ -58,7 +58,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcSysApiLoader, "wangwenx190.framelesshelper.core.sysapiloader")
+static Q_LOGGING_CATEGORY(lcSysApiLoader, "wangwenx190.framelesshelper.core.sysapiloader")
 #  define INFO qCInfo(lcSysApiLoader)
 #  define DEBUG qCDebug(lcSysApiLoader)
 #  define WARNING qCWarning(lcSysApiLoader)
@@ -75,7 +75,7 @@ using SysApiLoaderData = QHash<QString, QFunctionPointer>;
 Q_GLOBAL_STATIC(SysApiLoaderData, g_sysApiLoaderData)
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[nodiscard]] static inline bool isDebug()
+static inline bool isDebug()
 {
     static const bool flag = (qEnvironmentVariableIntValue("FRAMELESSHELPER_SYSAPILOADER_DEBUG") != 0);
     return flag;

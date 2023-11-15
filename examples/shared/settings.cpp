@@ -31,7 +31,7 @@
 
 static std::unique_ptr<QSettings> g_settings = nullptr;
 
-[[nodiscard]] static inline QSettings *appConfigFile()
+static inline QSettings *appConfigFile()
 {
     const QFileInfo fileInfo(QCoreApplication::applicationFilePath());
     const QString iniFileName = fileInfo.completeBaseName() + FRAMELESSHELPER_STRING_LITERAL(".ini");
@@ -39,7 +39,7 @@ static std::unique_ptr<QSettings> g_settings = nullptr;
     return new QSettings(iniFilePath, QSettings::IniFormat);
 }
 
-[[nodiscard]] static inline QString appKey(const QString &id, const QString &key)
+static inline QString appKey(const QString &id, const QString &key)
 {
     Q_ASSERT(!key.isEmpty());
     if (key.isEmpty()) {

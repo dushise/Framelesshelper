@@ -37,7 +37,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcStandardSystemButton, "wangwenx190.framelesshelper.widgets.standardsystembutton")
+static Q_LOGGING_CATEGORY(lcStandardSystemButton, "wangwenx190.framelesshelper.widgets.standardsystembutton")
 #  define INFO qCInfo(lcStandardSystemButton)
 #  define DEBUG qCDebug(lcStandardSystemButton)
 #  define WARNING qCWarning(lcStandardSystemButton)

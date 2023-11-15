@@ -53,7 +53,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcFramelessManager, "wangwenx190.framelesshelper.core.framelessmanager")
+static Q_LOGGING_CATEGORY(lcFramelessManager, "wangwenx190.framelesshelper.core.framelessmanager")
 #  define INFO qCInfo(lcFramelessManager)
 #  define DEBUG qCDebug(lcFramelessManager)
 #  define WARNING qCWarning(lcFramelessManager)
@@ -88,7 +88,7 @@ InternalData::~InternalData() = default;
 Q_GLOBAL_STATIC(InternalData, g_internalData)
 
 #if FRAMELESSHELPER_CONFIG(bundle_resource)
-[[nodiscard]] static inline QString iconFontFamilyName()
+static inline QString iconFontFamilyName()
 {
     static const auto result = []() -> QString {
 #ifdef Q_OS_WINDOWS

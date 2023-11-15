@@ -64,7 +64,7 @@ Q_DECLARE_METATYPE(QMargins)
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcUtilsWin, "wangwenx190.framelesshelper.core.utils.win")
+static Q_LOGGING_CATEGORY(lcUtilsWin, "wangwenx190.framelesshelper.core.utils.win")
 #  define INFO qCInfo(lcUtilsWin)
 #  define DEBUG qCDebug(lcUtilsWin)
 #  define WARNING qCWarning(lcUtilsWin)
@@ -207,7 +207,7 @@ struct UtilsWinExtraData : public FramelessExtraData
     UtilsWinExtraData();
     ~UtilsWinExtraData() override;
 
-    [[nodiscard]] static FramelessExtraDataPtr create();
+    static FramelessExtraDataPtr create();
 };
 using UtilsWinExtraDataPtr = std::shared_ptr<UtilsWinExtraData>;
 
@@ -220,7 +220,7 @@ FramelessExtraDataPtr UtilsWinExtraData::create()
     return std::make_shared<UtilsWinExtraData>();
 }
 
-[[nodiscard]] static inline UtilsWinExtraDataPtr tryGetExtraData(const FramelessDataPtr &data, const bool create)
+static inline UtilsWinExtraDataPtr tryGetExtraData(const FramelessDataPtr &data, const bool create)
 {
     Q_ASSERT(data);
     if (!data) {
@@ -242,32 +242,32 @@ struct Win32Message
     UINT Code = 0;
     LPCSTR Str = nullptr;
 
-    [[nodiscard]] friend inline constexpr bool operator==(const Win32Message &lhs, const Win32Message &rhs) noexcept
+    friend inline constexpr bool operator==(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return (lhs.Code == rhs.Code);
     }
 
-    [[nodiscard]] friend inline constexpr bool operator!=(const Win32Message &lhs, const Win32Message &rhs) noexcept
+    friend inline constexpr bool operator!=(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return !operator==(lhs, rhs);
     }
 
-    [[nodiscard]] friend inline constexpr bool operator>(const Win32Message &lhs, const Win32Message &rhs) noexcept
+    friend inline constexpr bool operator>(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return (lhs.Code > rhs.Code);
     }
 
-    [[nodiscard]] friend inline constexpr bool operator>=(const Win32Message &lhs, const Win32Message &rhs) noexcept
+    friend inline constexpr bool operator>=(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return (operator>(lhs, rhs) || operator==(lhs, rhs));
     }
 
-    [[nodiscard]] friend inline constexpr bool operator<(const Win32Message &lhs, const Win32Message &rhs) noexcept
+    friend inline constexpr bool operator<(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
     }
 
-    [[nodiscard]] friend inline constexpr bool operator<=(const Win32Message &lhs, const Win32Message &rhs) noexcept
+    friend inline constexpr bool operator<=(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return (operator<(lhs, rhs) || operator==(lhs, rhs));
     }
@@ -641,7 +641,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
 };
 #undef DEFINE_WIN32_MESSAGE
 
-[[nodiscard]] std::optional<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd)
+std::optional<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd)
 {
     Q_ASSERT(hwnd);
     if (!hwnd) {
@@ -664,37 +664,37 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     return monitorInfo;
 };
 
-[[maybe_unused]] [[nodiscard]] static inline QString qtWindowCustomMarginsProp()
+static inline QString qtWindowCustomMarginsProp()
 {
     static const QString prop = QString::fromUtf8(kQtWindowCustomMarginsVar);
     return prop;
 }
 
-[[nodiscard]] static inline QString dwmRegistryKey()
+static inline QString dwmRegistryKey()
 {
     static const QString key = QString::fromWCharArray(kDwmRegistryKey);
     return key;
 }
 
-[[nodiscard]] static inline QString personalizeRegistryKey()
+static inline QString personalizeRegistryKey()
 {
     static const QString key = QString::fromWCharArray(kPersonalizeRegistryKey);
     return key;
 }
 
-[[nodiscard]] static inline QString desktopRegistryKey()
+static inline QString desktopRegistryKey()
 {
     static const QString key = QString::fromWCharArray(kDesktopRegistryKey);
     return key;
 }
 
-[[nodiscard]] static inline QString dwmColorKeyName()
+static inline QString dwmColorKeyName()
 {
     static const QString name = QString::fromWCharArray(kDwmColorKeyName);
     return name;
 }
 
-[[nodiscard]] static inline bool doCompareWindowsVersion(const VersionNumber &targetOsVer)
+static inline bool doCompareWindowsVersion(const VersionNumber &targetOsVer)
 {
     static const auto currentOsVer = []() -> std::optional<VersionNumber> {
         if (API_NT_AVAILABLE(RtlGetVersion)) {
@@ -735,7 +735,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     return (::VerifyVersionInfoW(&osvi, (VER_MAJORVERSION | VER_MINORVERSION | VER_BUILDNUMBER), dwlConditionMask) != FALSE);
 }
 
-[[nodiscard]] static inline QString getSystemErrorMessageImpl(const QString &function, const DWORD code)
+static inline QString getSystemErrorMessageImpl(const QString &function, const DWORD code)
 {
     Q_ASSERT(!function.isEmpty());
     if (function.isEmpty()) {
@@ -759,7 +759,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
 #endif // FRAMELESSHELPER_CONFIG(private_qt)
 }
 
-[[nodiscard]] static inline QString getSystemErrorMessageImpl(const QString &function, const HRESULT hr)
+static inline QString getSystemErrorMessageImpl(const QString &function, const HRESULT hr)
 {
     Q_ASSERT(!function.isEmpty());
     if (function.isEmpty()) {
@@ -772,7 +772,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     return getSystemErrorMessageImpl(function, dwError);
 }
 
-[[nodiscard]] static inline bool moveWindowToMonitor(const HWND hwnd, const MONITORINFOEXW &activeMonitor)
+static inline bool moveWindowToMonitor(const HWND hwnd, const MONITORINFOEXW &activeMonitor)
 {
     Q_ASSERT(hwnd);
     if (!hwnd) {
@@ -809,7 +809,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     return true;
 }
 
-[[nodiscard]] static inline int getSystemMetrics2(const int index, const bool horizontal, const quint32 dpi)
+static inline int getSystemMetrics2(const int index, const bool horizontal, const quint32 dpi)
 {
     Q_ASSERT(dpi != 0);
     if (dpi == 0) {
@@ -824,7 +824,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     return std::round(qreal(::GetSystemMetrics(index)) / currentDpr * requestedDpr);
 }
 
-[[nodiscard]] static inline int getSystemMetrics2(const WId windowId, const int index, const bool horizontal, const bool scaled)
+static inline int getSystemMetrics2(const WId windowId, const int index, const bool horizontal, const bool scaled)
 {
     Q_ASSERT(windowId);
     if (!windowId) {
@@ -843,7 +843,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     return std::round(qreal(::GetSystemMetrics(index)) / dpr);
 }
 
-[[maybe_unused]] [[nodiscard]] static inline constexpr
+static inline constexpr
     DWORD qtEdgesToWin32Orientation(const Qt::Edges edges)
 {
     if (edges == Qt::Edges{}) {
@@ -870,20 +870,20 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
 }
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[nodiscard]] static inline bool isWin32MessageDebuggingEnabled()
+static inline bool isWin32MessageDebuggingEnabled()
 {
     static const bool result = (qEnvironmentVariableIntValue("FRAMELESSHELPER_ENABLE_WIN32_MESSAGE_DEBUGGING") != 0);
     return result;
 }
 #endif
 
-[[nodiscard]] static inline QByteArray qtNativeEventType()
+static inline QByteArray qtNativeEventType()
 {
     static const auto result = FRAMELESSHELPER_BYTEARRAY_LITERAL("windows_generic_MSG");
     return result;
 }
 
-[[nodiscard]] static inline constexpr bool isNonClientMessage(const UINT message)
+static inline constexpr bool isNonClientMessage(const UINT message)
 {
     if (((message >= WM_NCCREATE) && (message <= WM_NCACTIVATE))
             || ((message >= WM_NCMOUSEMOVE) && (message <= WM_NCMBUTTONDBLCLK))
@@ -898,7 +898,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     }
 }
 
-[[nodiscard]] static inline constexpr bool isMouseMessage(const UINT message, bool *isNonClient = nullptr)
+static inline constexpr bool isMouseMessage(const UINT message, bool *isNonClient = nullptr)
 {
     if (((message >= WM_MOUSEFIRST) && (message <= WM_MOUSELAST))
             || ((message == WM_MOUSEHOVER) || (message == WM_MOUSELEAVE))) {
@@ -918,7 +918,7 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
     }
 }
 
-[[nodiscard]] static inline LRESULT CALLBACK FramelessHelperHookWindowProc
+static inline LRESULT CALLBACK FramelessHelperHookWindowProc
     (const HWND hWnd, const UINT uMsg, const WPARAM wParam, const LPARAM lParam)
 {
     Q_ASSERT(hWnd);

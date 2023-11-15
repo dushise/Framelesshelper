@@ -35,7 +35,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcFramelessMainWindow, "wangwenx190.framelesshelper.widgets.framelessmainwindow")
+static Q_LOGGING_CATEGORY(lcFramelessMainWindow, "wangwenx190.framelesshelper.widgets.framelessmainwindow")
 #  define INFO qCInfo(lcFramelessMainWindow)
 #  define DEBUG qCDebug(lcFramelessMainWindow)
 #  define WARNING qCWarning(lcFramelessMainWindow)

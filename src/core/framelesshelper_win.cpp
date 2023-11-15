@@ -48,7 +48,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcFramelessHelperWin, "wangwenx190.framelesshelper.core.impl.win")
+static Q_LOGGING_CATEGORY(lcFramelessHelperWin, "wangwenx190.framelesshelper.core.impl.win")
 #  define INFO qCInfo(lcFramelessHelperWin)
 #  define DEBUG qCDebug(lcFramelessHelperWin)
 #  define WARNING qCWarning(lcFramelessHelperWin)
@@ -124,12 +124,12 @@ FramelessDataWin::FramelessDataWin() = default;
 
 FramelessDataWin::~FramelessDataWin() = default;
 
-[[nodiscard]] FramelessDataPtr FramelessData::create()
+FramelessDataPtr FramelessData::create()
 {
     return std::make_shared<FramelessDataWin>();
 }
 
-[[nodiscard]] static inline FramelessDataWinPtr tryGetData(const QObject *window)
+static inline FramelessDataWinPtr tryGetData(const QObject *window)
 {
     Q_ASSERT(window);
     if (!window) {
@@ -148,15 +148,15 @@ struct FramelessHelperWinInternal
 };
 Q_GLOBAL_STATIC(FramelessHelperWinInternal, g_internalData)
 
-[[nodiscard]] extern std::optional<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd);
+extern std::optional<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd);
 
-[[nodiscard]] static inline QByteArray qtNativeEventType()
+static inline QByteArray qtNativeEventType()
 {
     static const auto result = FRAMELESSHELPER_BYTEARRAY_LITERAL("windows_generic_MSG");
     return result;
 }
 
-[[nodiscard]] static inline WindowPart getHittedWindowPart(const int hitTestResult)
+static inline WindowPart getHittedWindowPart(const int hitTestResult)
 {
     switch (hitTestResult) {
     case HTCLIENT:
@@ -186,12 +186,12 @@ Q_GLOBAL_STATIC(FramelessHelperWinInternal, g_internalData)
     return WindowPart::Outside;
 }
 
-[[nodiscard]] static inline constexpr bool isTaggedMessage(const WPARAM wParam)
+static inline constexpr bool isTaggedMessage(const WPARAM wParam)
 {
     return (wParam == kMessageTag);
 }
 
-[[nodiscard]] static inline bool requestForMouseLeaveMessage(const HWND hWnd, const bool nonClient)
+static inline bool requestForMouseLeaveMessage(const HWND hWnd, const bool nonClient)
 {
     Q_ASSERT(hWnd);
     if (!hWnd) {

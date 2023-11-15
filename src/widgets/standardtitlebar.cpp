@@ -45,7 +45,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcStandardTitleBar, "wangwenx190.framelesshelper.widgets.standardtitlebar")
+static Q_LOGGING_CATEGORY(lcStandardTitleBar, "wangwenx190.framelesshelper.widgets.standardtitlebar")
 #  define INFO qCInfo(lcStandardTitleBar)
 #  define DEBUG qCDebug(lcStandardTitleBar)
 #  define WARNING qCWarning(lcStandardTitleBar)

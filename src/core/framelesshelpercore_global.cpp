@@ -96,7 +96,7 @@ void FramelessHelperCoreInitResource()
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcCoreGlobal, "wangwenx190.framelesshelper.core.global")
+static Q_LOGGING_CATEGORY(lcCoreGlobal, "wangwenx190.framelesshelper.core.global")
 #  define INFO qCInfo(lcCoreGlobal)
 #  define DEBUG qCDebug(lcCoreGlobal)
 #  define WARNING qCWarning(lcCoreGlobal)

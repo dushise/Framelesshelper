@@ -34,7 +34,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcChromePalette, "wangwenx190.framelesshelper.core.chromepalette")
+static Q_LOGGING_CATEGORY(lcChromePalette, "wangwenx190.framelesshelper.core.chromepalette")
 #  define INFO qCInfo(lcChromePalette)
 #  define DEBUG qCDebug(lcChromePalette)
 #  define WARNING qCWarning(lcChromePalette)

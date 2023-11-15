@@ -36,17 +36,17 @@ struct VersionNumber
     unsigned long Patch = 0;
     unsigned long Tweak = 0;
 
-    [[nodiscard]] friend constexpr bool operator==(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend constexpr bool operator==(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
         return ((lhs.Major == rhs.Major) && (lhs.Minor == rhs.Minor) && (lhs.Patch == rhs.Patch) && (lhs.Tweak == rhs.Tweak));
     }
 
-    [[nodiscard]] friend constexpr bool operator!=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend constexpr bool operator!=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
         return !operator==(lhs, rhs);
     }
 
-    [[nodiscard]] friend constexpr bool operator>(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend constexpr bool operator>(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
         if (operator==(lhs, rhs)) {
             return false;
@@ -72,24 +72,24 @@ struct VersionNumber
         return (lhs.Tweak > rhs.Tweak);
     }
 
-    [[nodiscard]] friend constexpr bool operator<(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend constexpr bool operator<(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
         return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
     }
 
-    [[nodiscard]] friend constexpr bool operator>=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend constexpr bool operator>=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
         return (operator>(lhs, rhs) || operator==(lhs, rhs));
     }
 
-    [[nodiscard]] friend constexpr bool operator<=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend constexpr bool operator<=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
         return (operator<(lhs, rhs) || operator==(lhs, rhs));
     }
 };
 
 #ifdef Q_OS_WINDOWS
-[[maybe_unused]] inline constexpr const std::array<VersionNumber, static_cast<int>(Global::WindowsVersion::Latest) + 1> WindowsVersions =
+inline constexpr const std::array<VersionNumber, static_cast<int>(Global::WindowsVersion::Latest) + 1> WindowsVersions =
 {
     VersionNumber{  5, 0,  2195 }, // Windows 2000
     VersionNumber{  5, 1,  2600 }, // Windows XP

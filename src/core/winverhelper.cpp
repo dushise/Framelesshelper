@@ -41,7 +41,7 @@ public:
     explicit WinVerHelper();
     ~WinVerHelper();
 
-    [[nodiscard]] bool check(const WindowsVersion version) const;
+    bool check(const WindowsVersion version) const;
 
 private:
     void initialize();

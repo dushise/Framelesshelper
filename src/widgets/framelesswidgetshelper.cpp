@@ -57,7 +57,7 @@ extern Q_WIDGETS_EXPORT QWidget *qt_button_down;
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcFramelessWidgetsHelper, "wangwenx190.framelesshelper.widgets.framelesswidgetshelper")
+static Q_LOGGING_CATEGORY(lcFramelessWidgetsHelper, "wangwenx190.framelesshelper.widgets.framelesswidgetshelper")
 #  define INFO qCInfo(lcFramelessWidgetsHelper)
 #  define DEBUG qCDebug(lcFramelessWidgetsHelper)
 #  define WARNING qCWarning(lcFramelessWidgetsHelper)
@@ -87,7 +87,7 @@ struct FramelessWidgetsHelperExtraData : public FramelessExtraData
     FramelessWidgetsHelperExtraData();
     ~FramelessWidgetsHelperExtraData() override;
 
-    [[nodiscard]] static FramelessExtraDataPtr create();
+    static FramelessExtraDataPtr create();
 };
 using FramelessWidgetsHelperExtraDataPtr = std::shared_ptr<FramelessWidgetsHelperExtraData>;
 
@@ -100,7 +100,7 @@ FramelessExtraDataPtr FramelessWidgetsHelperExtraData::create()
     return std::make_shared<FramelessWidgetsHelperExtraData>();
 }
 
-[[nodiscard]] static inline FramelessWidgetsHelperExtraDataPtr tryGetExtraData(const FramelessDataPtr &data, const bool create)
+static inline FramelessWidgetsHelperExtraDataPtr tryGetExtraData(const FramelessDataPtr &data, const bool create)
 {
     Q_ASSERT(data);
     if (!data) {
@@ -117,7 +117,7 @@ FramelessExtraDataPtr FramelessWidgetsHelperExtraData::create()
     return std::dynamic_pointer_cast<FramelessWidgetsHelperExtraData>(it.value());
 }
 
-[[nodiscard]] static inline FramelessWidgetsHelperExtraDataPtr tryGetExtraData(const QWidget *window, const bool create)
+static inline FramelessWidgetsHelperExtraDataPtr tryGetExtraData(const QWidget *window, const bool create)
 {
     Q_ASSERT(window);
     if (!window) {
@@ -130,7 +130,7 @@ FramelessExtraDataPtr FramelessWidgetsHelperExtraData::create()
     return tryGetExtraData(data, create);
 }
 
-[[nodiscard]] static inline bool isWidgetFixedSize(const QWidget *widget)
+static inline bool isWidgetFixedSize(const QWidget *widget)
 {
     Q_ASSERT(widget);
     if (!widget) {

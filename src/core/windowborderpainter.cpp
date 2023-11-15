@@ -38,7 +38,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcWindowBorderPainter, "wangwenx190.framelesshelper.core.windowborderpainter")
+static Q_LOGGING_CATEGORY(lcWindowBorderPainter, "wangwenx190.framelesshelper.core.windowborderpainter")
 #  define INFO qCInfo(lcWindowBorderPainter)
 #  define DEBUG qCDebug(lcWindowBorderPainter)
 #  define WARNING qCWarning(lcWindowBorderPainter)

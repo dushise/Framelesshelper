@@ -32,5 +32,5 @@ namespace Settings
     void set(const QString &id, const QString &key, const T &data);
 
     template<typename T>
-    [[nodiscard]] T get(const QString &id, const QString &key);
+    T get(const QString &id, const QString &key);
 } // namespace Settings

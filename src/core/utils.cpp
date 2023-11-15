@@ -52,7 +52,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-[[maybe_unused]] static Q_LOGGING_CATEGORY(lcUtilsCommon, "wangwenx190.framelesshelper.core.utils.common")
+static Q_LOGGING_CATEGORY(lcUtilsCommon, "wangwenx190.framelesshelper.core.utils.common")
 #  define INFO qCInfo(lcUtilsCommon)
 #  define DEBUG qCDebug(lcUtilsCommon)
 #  define WARNING qCWarning(lcUtilsCommon)
@@ -86,7 +86,7 @@ static constexpr const std::array<FONT_ICON, static_cast<int>(SystemButtonType::
 #endif // FRAMELESSHELPER_CONFIG(bundle_resource)
 
 #if !FRAMELESSHELPER_CONFIG(private_qt)
-[[nodiscard]] static inline QPoint getScaleOrigin(const QWindow *window)
+static inline QPoint getScaleOrigin(const QWindow *window)
 {
     Q_ASSERT(window);
     if (!window) {
