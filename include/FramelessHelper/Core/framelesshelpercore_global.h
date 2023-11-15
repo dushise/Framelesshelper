@@ -419,7 +419,7 @@ namespace PMSoft {
         };
         Q_ENUM_NS(Option)
 
-            enum class SystemTheme : quint8
+        enum class SystemTheme : quint8
         {
             Unknown,
             Light,
@@ -428,7 +428,7 @@ namespace PMSoft {
         };
         Q_ENUM_NS(SystemTheme)
 
-            enum class SystemButtonType : quint8
+        enum class SystemButtonType : quint8
         {
             Unknown,
             WindowIcon,
@@ -442,7 +442,7 @@ namespace PMSoft {
         Q_ENUM_NS(SystemButtonType)
 
 #ifdef Q_OS_WINDOWS
-            enum class DwmColorizationArea : quint8
+        enum class DwmColorizationArea : quint8
         {
             None,
             StartMenu_TaskBar_ActionCenter,
@@ -452,7 +452,7 @@ namespace PMSoft {
         Q_ENUM_NS(DwmColorizationArea)
 #endif // Q_OS_WINDOWS
 
-            enum class ButtonState : quint8
+        enum class ButtonState : quint8
         {
             Normal,
             Hovered,
@@ -462,7 +462,7 @@ namespace PMSoft {
         Q_ENUM_NS(ButtonState)
 
 #ifdef Q_OS_WINDOWS
-            enum class WindowsVersion : quint8
+        enum class WindowsVersion : quint8
         {
             _2000,
             _XP,
@@ -501,7 +501,7 @@ namespace PMSoft {
         Q_ENUM_NS(WindowsVersion)
 #endif // Q_OS_WINDOWS
 
-            enum class BlurMode : quint8
+        enum class BlurMode : quint8
         {
             Disable, // Do not enable blur behind window
             Default, // Use platform default blur mode
@@ -512,7 +512,7 @@ namespace PMSoft {
         };
         Q_ENUM_NS(BlurMode)
 
-            enum class WallpaperAspectStyle : quint8
+        enum class WallpaperAspectStyle : quint8
         {
             Fill, // Keep aspect ratio to fill, expand/crop if necessary.
             Fit, // Keep aspect ratio to fill, but don't expand/crop.
@@ -524,7 +524,7 @@ namespace PMSoft {
         Q_ENUM_NS(WallpaperAspectStyle)
 
 #ifdef Q_OS_WINDOWS
-            enum class RegistryRootKey : quint8
+        enum class RegistryRootKey : quint8
         {
             ClassesRoot,
             CurrentUser,
@@ -540,7 +540,7 @@ namespace PMSoft {
         Q_ENUM_NS(RegistryRootKey)
 #endif // Q_OS_WINDOWS
 
-            enum class WindowEdge : quint8
+        enum class WindowEdge : quint8
         {
             Left = 1 << 0,
             Top = 1 << 1,
@@ -553,7 +553,7 @@ namespace PMSoft {
             Q_DECLARE_OPERATORS_FOR_FLAGS(WindowEdges)
 
 #ifdef Q_OS_WINDOWS
-            enum class DpiAwareness : quint8
+        enum class DpiAwareness : quint8
         {
             Unknown,
             Unaware,
@@ -565,7 +565,7 @@ namespace PMSoft {
         Q_ENUM_NS(DpiAwareness)
 #endif // Q_OS_WINDOWS
 
-            enum class WindowCornerStyle : quint8
+        enum class WindowCornerStyle : quint8
         {
             Default,
             Square,
@@ -573,7 +573,7 @@ namespace PMSoft {
         };
         Q_ENUM_NS(WindowCornerStyle)
 
-            struct VersionInfo
+        struct VersionInfo
         {
             struct {
                 unsigned long num = 0;

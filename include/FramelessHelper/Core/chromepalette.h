@@ -117,6 +117,9 @@ Q_SIGNALS:
     void closeButtonPressColorChanged();
     void titleBarColorChanged();
     void chromeButtonColorChanged();
+
+private:
+    bool updateColor(QSharedPointer<QColor>& src,const QColor& color);
 };
 
 FRAMELESSHELPER_END_NAMESPACE

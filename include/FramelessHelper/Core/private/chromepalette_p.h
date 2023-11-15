@@ -25,7 +25,6 @@
 #pragma once
 
 #include <FramelessHelper/Core/framelesshelpercore_global.h>
-#include <optional>
 
 #if FRAMELESSHELPER_CONFIG(titlebar)
 
@@ -54,16 +53,16 @@ public:
     QColor closeButtonHoverColor_sys = {};
     QColor closeButtonPressColor_sys = {};
     // User-defined ones:
-    std::optional<QColor> titleBarActiveBackgroundColor = std::nullopt;
-    std::optional<QColor> titleBarInactiveBackgroundColor = std::nullopt;
-    std::optional<QColor> titleBarActiveForegroundColor = std::nullopt;
-    std::optional<QColor> titleBarInactiveForegroundColor = std::nullopt;
-    std::optional<QColor> chromeButtonNormalColor = std::nullopt;
-    std::optional<QColor> chromeButtonHoverColor = std::nullopt;
-    std::optional<QColor> chromeButtonPressColor = std::nullopt;
-    std::optional<QColor> closeButtonNormalColor = std::nullopt;
-    std::optional<QColor> closeButtonHoverColor = std::nullopt;
-    std::optional<QColor> closeButtonPressColor = std::nullopt;
+    QSharedPointer<QColor> titleBarActiveBackgroundColor = nullptr;
+    QSharedPointer<QColor> titleBarInactiveBackgroundColor = nullptr;
+    QSharedPointer<QColor> titleBarActiveForegroundColor = nullptr;
+    QSharedPointer<QColor> titleBarInactiveForegroundColor = nullptr;
+    QSharedPointer<QColor> chromeButtonNormalColor = nullptr;
+    QSharedPointer<QColor> chromeButtonHoverColor = nullptr;
+    QSharedPointer<QColor> chromeButtonPressColor = nullptr;
+    QSharedPointer<QColor> closeButtonNormalColor = nullptr;
+    QSharedPointer<QColor> closeButtonHoverColor = nullptr;
+    QSharedPointer<QColor> closeButtonPressColor = nullptr;
 };
 
 FRAMELESSHELPER_END_NAMESPACE

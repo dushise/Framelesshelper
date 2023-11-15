@@ -133,61 +133,61 @@ ChromePalette::~ChromePalette() = default;
 QColor ChromePalette::titleBarActiveBackgroundColor() const
 {
     Q_D(const ChromePalette);
-    return d->titleBarActiveBackgroundColor.value_or(d->titleBarActiveBackgroundColor_sys);
+    return d->titleBarActiveBackgroundColor.isNull()?d->titleBarActiveBackgroundColor_sys:*(d->titleBarActiveBackgroundColor);
 }
 
 QColor ChromePalette::titleBarInactiveBackgroundColor() const
 {
     Q_D(const ChromePalette);
-    return d->titleBarInactiveBackgroundColor.value_or(d->titleBarInactiveBackgroundColor_sys);
+	return d->titleBarInactiveBackgroundColor.isNull() ? d->titleBarInactiveBackgroundColor_sys : *(d->titleBarInactiveBackgroundColor);
 }
 
 QColor ChromePalette::titleBarActiveForegroundColor() const
 {
     Q_D(const ChromePalette);
-    return d->titleBarActiveForegroundColor.value_or(d->titleBarActiveForegroundColor_sys);
+	return d->titleBarActiveForegroundColor.isNull() ? d->titleBarActiveForegroundColor_sys : *(d->titleBarActiveForegroundColor);
 }
 
 QColor ChromePalette::titleBarInactiveForegroundColor() const
 {
     Q_D(const ChromePalette);
-    return d->titleBarInactiveForegroundColor.value_or(d->titleBarInactiveForegroundColor_sys);
+    return d->titleBarInactiveForegroundColor.isNull() ? d->titleBarInactiveForegroundColor_sys : *(d->titleBarInactiveForegroundColor);
 }
 
 QColor ChromePalette::chromeButtonNormalColor() const
 {
     Q_D(const ChromePalette);
-    return d->chromeButtonNormalColor.value_or(d->chromeButtonNormalColor_sys);
+	return d->chromeButtonNormalColor.isNull() ? d->chromeButtonNormalColor_sys : *(d->chromeButtonNormalColor);
 }
 
 QColor ChromePalette::chromeButtonHoverColor() const
 {
     Q_D(const ChromePalette);
-    return d->chromeButtonHoverColor.value_or(d->chromeButtonHoverColor_sys);
+	return d->chromeButtonHoverColor.isNull() ? d->chromeButtonHoverColor_sys : *(d->chromeButtonHoverColor);
 }
 
 QColor ChromePalette::chromeButtonPressColor() const
 {
     Q_D(const ChromePalette);
-    return d->chromeButtonPressColor.value_or(d->chromeButtonPressColor_sys);
+	return d->chromeButtonPressColor.isNull() ? d->chromeButtonPressColor_sys : *(d->chromeButtonPressColor);
 }
 
 QColor ChromePalette::closeButtonNormalColor() const
 {
     Q_D(const ChromePalette);
-    return d->closeButtonNormalColor.value_or(d->closeButtonNormalColor_sys);
+	return d->closeButtonNormalColor.isNull() ? d->closeButtonNormalColor_sys : *(d->closeButtonNormalColor);
 }
 
 QColor ChromePalette::closeButtonHoverColor() const
 {
     Q_D(const ChromePalette);
-    return d->closeButtonHoverColor.value_or(d->closeButtonHoverColor_sys);
+    return d->closeButtonHoverColor.isNull() ? d->closeButtonHoverColor_sys : *(d->closeButtonHoverColor);
 }
 
 QColor ChromePalette::closeButtonPressColor() const
 {
     Q_D(const ChromePalette);
-    return d->closeButtonPressColor.value_or(d->closeButtonPressColor_sys);
+    return d->closeButtonPressColor.isNull() ? d->closeButtonPressColor_sys : *(d->closeButtonPressColor);
 }
 
 void ChromePalette::setTitleBarActiveBackgroundColor(const QColor &value)
@@ -197,10 +197,8 @@ void ChromePalette::setTitleBarActiveBackgroundColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->titleBarActiveBackgroundColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->titleBarActiveBackgroundColor = value;
+    if (updateColor(d->titleBarActiveBackgroundColor,value))return;
+ 
     Q_EMIT titleBarActiveBackgroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -208,7 +206,7 @@ void ChromePalette::setTitleBarActiveBackgroundColor(const QColor &value)
 void ChromePalette::resetTitleBarActiveBackgroundColor()
 {
     Q_D(ChromePalette);
-    d->titleBarActiveBackgroundColor = std::nullopt;
+    d->titleBarActiveBackgroundColor.reset();
     Q_EMIT titleBarActiveBackgroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -220,10 +218,8 @@ void ChromePalette::setTitleBarInactiveBackgroundColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->titleBarInactiveBackgroundColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->titleBarInactiveBackgroundColor = value;
+    if (updateColor(d->titleBarInactiveBackgroundColor, value))return;
+
     Q_EMIT titleBarInactiveBackgroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -231,7 +227,7 @@ void ChromePalette::setTitleBarInactiveBackgroundColor(const QColor &value)
 void ChromePalette::resetTitleBarInactiveBackgroundColor()
 {
     Q_D(ChromePalette);
-    d->titleBarInactiveBackgroundColor = std::nullopt;
+    d->titleBarInactiveBackgroundColor.reset();
     Q_EMIT titleBarInactiveBackgroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -243,10 +239,8 @@ void ChromePalette::setTitleBarActiveForegroundColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->titleBarActiveForegroundColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->titleBarActiveForegroundColor = value;
+    if (updateColor(d->titleBarActiveForegroundColor, value))return;
+
     Q_EMIT titleBarActiveForegroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -254,7 +248,7 @@ void ChromePalette::setTitleBarActiveForegroundColor(const QColor &value)
 void ChromePalette::resetTitleBarActiveForegroundColor()
 {
     Q_D(ChromePalette);
-    d->titleBarActiveForegroundColor = std::nullopt;
+    d->titleBarActiveForegroundColor.reset();
     Q_EMIT titleBarActiveForegroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -266,10 +260,8 @@ void ChromePalette::setTitleBarInactiveForegroundColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->titleBarInactiveForegroundColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->titleBarInactiveForegroundColor = value;
+    if (updateColor(d->titleBarInactiveForegroundColor, value))return;
+
     Q_EMIT titleBarInactiveForegroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -277,7 +269,7 @@ void ChromePalette::setTitleBarInactiveForegroundColor(const QColor &value)
 void ChromePalette::resetTitleBarInactiveForegroundColor()
 {
     Q_D(ChromePalette);
-    d->titleBarInactiveForegroundColor = std::nullopt;
+    d->titleBarInactiveForegroundColor.reset();
     Q_EMIT titleBarInactiveForegroundColorChanged();
     Q_EMIT titleBarColorChanged();
 }
@@ -289,10 +281,8 @@ void ChromePalette::setChromeButtonNormalColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->chromeButtonNormalColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->chromeButtonNormalColor = value;
+    if (updateColor(d->chromeButtonNormalColor, value))return;
+
     Q_EMIT chromeButtonNormalColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -300,7 +290,7 @@ void ChromePalette::setChromeButtonNormalColor(const QColor &value)
 void ChromePalette::resetChromeButtonNormalColor()
 {
     Q_D(ChromePalette);
-    d->chromeButtonNormalColor = std::nullopt;
+    d->chromeButtonNormalColor.reset();
     Q_EMIT chromeButtonNormalColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -312,10 +302,8 @@ void ChromePalette::setChromeButtonHoverColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->chromeButtonHoverColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->chromeButtonHoverColor = value;
+    if (updateColor(d->chromeButtonHoverColor, value))return;
+
     Q_EMIT chromeButtonHoverColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -323,7 +311,7 @@ void ChromePalette::setChromeButtonHoverColor(const QColor &value)
 void ChromePalette::resetChromeButtonHoverColor()
 {
     Q_D(ChromePalette);
-    d->chromeButtonHoverColor = std::nullopt;
+    d->chromeButtonHoverColor.reset();
     Q_EMIT chromeButtonHoverColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -335,10 +323,8 @@ void ChromePalette::setChromeButtonPressColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->chromeButtonPressColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->chromeButtonPressColor = value;
+    if (updateColor(d->chromeButtonPressColor, value))return;
+
     Q_EMIT chromeButtonPressColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -346,7 +332,7 @@ void ChromePalette::setChromeButtonPressColor(const QColor &value)
 void ChromePalette::resetChromeButtonPressColor()
 {
     Q_D(ChromePalette);
-    d->chromeButtonPressColor = std::nullopt;
+    d->chromeButtonPressColor.reset();
     Q_EMIT chromeButtonPressColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -358,10 +344,8 @@ void ChromePalette::setCloseButtonNormalColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->closeButtonNormalColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->closeButtonNormalColor = value;
+    if (updateColor(d->closeButtonNormalColor, value))return;
+
     Q_EMIT closeButtonNormalColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -369,7 +353,7 @@ void ChromePalette::setCloseButtonNormalColor(const QColor &value)
 void ChromePalette::resetCloseButtonNormalColor()
 {
     Q_D(ChromePalette);
-    d->closeButtonNormalColor = std::nullopt;
+    d->closeButtonNormalColor.reset();
     Q_EMIT closeButtonNormalColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -381,10 +365,8 @@ void ChromePalette::setCloseButtonHoverColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->closeButtonHoverColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->closeButtonHoverColor = value;
+    if (updateColor(d->closeButtonHoverColor, value))return;
+  
     Q_EMIT closeButtonHoverColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -392,7 +374,7 @@ void ChromePalette::setCloseButtonHoverColor(const QColor &value)
 void ChromePalette::resetCloseButtonHoverColor()
 {
     Q_D(ChromePalette);
-    d->closeButtonHoverColor = std::nullopt;
+    d->closeButtonHoverColor.reset();
     Q_EMIT closeButtonHoverColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -404,10 +386,8 @@ void ChromePalette::setCloseButtonPressColor(const QColor &value)
         return;
     }
     Q_D(ChromePalette);
-    if (d->closeButtonPressColor.value_or(QColor()) == value) {
-        return;
-    }
-    d->closeButtonPressColor = value;
+    if (updateColor(d->closeButtonPressColor, value))return;
+
     Q_EMIT closeButtonPressColorChanged();
     Q_EMIT chromeButtonColorChanged();
 }
@@ -415,9 +395,24 @@ void ChromePalette::setCloseButtonPressColor(const QColor &value)
 void ChromePalette::resetCloseButtonPressColor()
 {
     Q_D(ChromePalette);
-    d->closeButtonPressColor = std::nullopt;
+    d->closeButtonPressColor.reset();
     Q_EMIT closeButtonPressColorChanged();
     Q_EMIT chromeButtonColorChanged();
+}
+
+bool ChromePalette::updateColor(QSharedPointer<QColor>& src, const QColor& color)
+{
+    if (src.isNull())
+    {
+        src = QSharedPointer<QColor>(new QColor(color));
+        return true;
+    }
+	
+    if (*src == color)
+		return false;
+
+	*src = color;
+    return true;
 }
 
 FRAMELESSHELPER_END_NAMESPACE
