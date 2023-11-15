@@ -336,7 +336,7 @@ FRAMELESSHELPER_CORE_API void FramelessHelperCoreInitResource();
 inline void framelesshelpercore_initResource() { FramelessHelperCoreInitResource(); }
 #endif // FRAMELESSHELPER_CORE_NO_BUNDLE_RESOURCE
 
-FRAMELESSHELPER_BEGIN_NAMESPACE
+namespace PMSoft {
 
 #include "framelesshelper.version"
 
@@ -344,24 +344,24 @@ FRAMELESSHELPER_BEGIN_NAMESPACE
 #  define __FRAMELESSHELPER__ __FRAMELESSHELPER_VERSION__
 #endif // __FRAMELESSHELPER__
 
-namespace Global
-{
+    namespace Global
+    {
 
-Q_NAMESPACE_EXPORT(FRAMELESSHELPER_CORE_API)
+        Q_NAMESPACE_EXPORT(FRAMELESSHELPER_CORE_API)
 
-inline constexpr const int kDefaultResizeBorderThickness = 8;
-inline constexpr const int kDefaultCaptionHeight = 23;
-inline constexpr const int kDefaultTitleBarHeight = 32;
-inline constexpr const int kDefaultExtendedTitleBarHeight = 48;
-inline constexpr const int kDefaultWindowFrameBorderThickness = 1;
-inline constexpr const int kDefaultTitleBarFontPointSize = 11;
-inline constexpr const int kDefaultTitleBarContentsMargin = 10;
-inline constexpr const int kMacOSChromeButtonAreaWidth = 60;
-inline constexpr const QSize kDefaultWindowIconSize = {16, 16};
-// We have to use "qRound()" here because "std::round()" is not constexpr, yet.
-inline constexpr const QSize kDefaultSystemButtonSize = {qRound(qreal(kDefaultTitleBarHeight) * 1.5), kDefaultTitleBarHeight};
-inline constexpr const QSize kDefaultSystemButtonIconSize = kDefaultWindowIconSize;
-inline constexpr const QSize kDefaultWindowSize = {160, 160}; // Value taken from Windows QPA.
+        inline constexpr const int kDefaultResizeBorderThickness = 8;
+        inline constexpr const int kDefaultCaptionHeight = 23;
+        inline constexpr const int kDefaultTitleBarHeight = 32;
+        inline constexpr const int kDefaultExtendedTitleBarHeight = 48;
+        inline constexpr const int kDefaultWindowFrameBorderThickness = 1;
+        inline constexpr const int kDefaultTitleBarFontPointSize = 11;
+        inline constexpr const int kDefaultTitleBarContentsMargin = 10;
+        inline constexpr const int kMacOSChromeButtonAreaWidth = 60;
+        inline constexpr const QSize kDefaultWindowIconSize = { 16, 16 };
+        // We have to use "qRound()" here because "std::round()" is not constexpr, yet.
+        inline constexpr const QSize kDefaultSystemButtonSize = { qRound(qreal(kDefaultTitleBarHeight) * 1.5), kDefaultTitleBarHeight };
+        inline constexpr const QSize kDefaultSystemButtonIconSize = kDefaultWindowIconSize;
+        inline constexpr const QSize kDefaultWindowSize = { 160, 160 }; // Value taken from Windows QPA.
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 #  define kDefaultWhiteColor QColorConstants::White
@@ -370,291 +370,294 @@ inline constexpr const QSize kDefaultWindowSize = {160, 160}; // Value taken fro
 #  define kDefaultLightGrayColor QColorConstants::LightGray
 #  define kDefaultDarkGrayColor QColorConstants::DarkGray
 #else // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-   inline Q_COLOR_CONSTEXPR const QColor kDefaultWhiteColor = {255, 255, 255}; // #FFFFFF
-   inline Q_COLOR_CONSTEXPR const QColor kDefaultBlackColor = {0, 0, 0}; // #000000
-   inline Q_COLOR_CONSTEXPR const QColor kDefaultTransparentColor = {0, 0, 0, 0};
-   inline Q_COLOR_CONSTEXPR const QColor kDefaultLightGrayColor = {211, 211, 211}; // #D3D3D3
-   inline Q_COLOR_CONSTEXPR const QColor kDefaultDarkGrayColor = {169, 169, 169}; // #A9A9A9
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultWhiteColor = { 255, 255, 255 }; // #FFFFFF
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultBlackColor = { 0, 0, 0 }; // #000000
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultTransparentColor = { 0, 0, 0, 0 };
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultLightGrayColor = { 211, 211, 211 }; // #D3D3D3
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultDarkGrayColor = { 169, 169, 169 }; // #A9A9A9
 #endif // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 
-inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor = {240, 240, 240}; // #F0F0F0
-inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemDarkColor = {32, 32, 32}; // #202020
-inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorLight = {110, 110, 110}; // #6E6E6E
-inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorDark = {51, 51, 51}; // #333333
-inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorLight = {167, 167, 167}; // #A7A7A7
-inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorDark = {61, 61, 62}; // #3D3D3E
-inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemButtonBackgroundColor = {204, 204, 204}; // #CCCCCC
-inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemCloseButtonBackgroundColor = {232, 17, 35}; // #E81123
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor = { 240, 240, 240 }; // #F0F0F0
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemDarkColor = { 32, 32, 32 }; // #202020
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorLight = { 110, 110, 110 }; // #6E6E6E
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorDark = { 51, 51, 51 }; // #333333
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorLight = { 167, 167, 167 }; // #A7A7A7
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorDark = { 61, 61, 62 }; // #3D3D3E
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemButtonBackgroundColor = { 204, 204, 204 }; // #CCCCCC
+        inline Q_COLOR_CONSTEXPR const QColor kDefaultSystemCloseButtonBackgroundColor = { 232, 17, 35 }; // #E81123
 
-inline constexpr const char kDontOverrideCursorVar[] = "FRAMELESSHELPER_DONT_OVERRIDE_CURSOR";
-inline constexpr const char kDontToggleMaximizeVar[] = "FRAMELESSHELPER_DONT_TOGGLE_MAXIMIZE";
-inline constexpr const char kSysMenuDisableMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MOVE";
-inline constexpr const char kSysMenuDisableSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_SIZE";
-inline constexpr const char kSysMenuDisableMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MINIMIZE";
-inline constexpr const char kSysMenuDisableMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MAXIMIZE";
-inline constexpr const char kSysMenuDisableRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_RESTORE";
-inline constexpr const char kSysMenuDisableCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_CLOSE";
-inline constexpr const char kSysMenuRemoveMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MOVE";
-inline constexpr const char kSysMenuRemoveSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SIZE";
-inline constexpr const char kSysMenuRemoveMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MINIMIZE";
-inline constexpr const char kSysMenuRemoveMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MAXIMIZE";
-inline constexpr const char kSysMenuRemoveRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_RESTORE";
-inline constexpr const char kSysMenuRemoveSeparatorVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SEPARATOR";
-inline constexpr const char kSysMenuRemoveCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_CLOSE";
+        inline constexpr const char kDontOverrideCursorVar[] = "FRAMELESSHELPER_DONT_OVERRIDE_CURSOR";
+        inline constexpr const char kDontToggleMaximizeVar[] = "FRAMELESSHELPER_DONT_TOGGLE_MAXIMIZE";
+        inline constexpr const char kSysMenuDisableMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MOVE";
+        inline constexpr const char kSysMenuDisableSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_SIZE";
+        inline constexpr const char kSysMenuDisableMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MINIMIZE";
+        inline constexpr const char kSysMenuDisableMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_MAXIMIZE";
+        inline constexpr const char kSysMenuDisableRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_RESTORE";
+        inline constexpr const char kSysMenuDisableCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_DISABLE_CLOSE";
+        inline constexpr const char kSysMenuRemoveMoveVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MOVE";
+        inline constexpr const char kSysMenuRemoveSizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SIZE";
+        inline constexpr const char kSysMenuRemoveMinimizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MINIMIZE";
+        inline constexpr const char kSysMenuRemoveMaximizeVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_MAXIMIZE";
+        inline constexpr const char kSysMenuRemoveRestoreVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_RESTORE";
+        inline constexpr const char kSysMenuRemoveSeparatorVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_SEPARATOR";
+        inline constexpr const char kSysMenuRemoveCloseVar[] = "FRAMELESSHELPER_SYSTEM_MENU_REMOVE_CLOSE";
 
-enum class Option : quint8
-{
-    UseCrossPlatformQtImplementation,
-    ForceHideWindowFrameBorder,
-    ForceShowWindowFrameBorder,
-    DisableWindowsSnapLayout,
-    WindowUseRoundCorners,
-    CenterWindowBeforeShow,
-    EnableBlurBehindWindow,
-    ForceNonNativeBackgroundBlur,
-    DisableLazyInitializationForMicaMaterial,
-    ForceNativeBackgroundBlur,
-    WindowUseSquareCorners,
-    Last = WindowUseSquareCorners
-};
-Q_ENUM_NS(Option)
+        enum class Option : quint8
+        {
+            UseCrossPlatformQtImplementation,
+            ForceHideWindowFrameBorder,
+            ForceShowWindowFrameBorder,
+            DisableWindowsSnapLayout,
+            WindowUseRoundCorners,
+            CenterWindowBeforeShow,
+            EnableBlurBehindWindow,
+            ForceNonNativeBackgroundBlur,
+            DisableLazyInitializationForMicaMaterial,
+            ForceNativeBackgroundBlur,
+            WindowUseSquareCorners,
+            Last = WindowUseSquareCorners
+        };
+        Q_ENUM_NS(Option)
 
-enum class SystemTheme : quint8
-{
-    Unknown,
-    Light,
-    Dark,
-    HighContrast
-};
-Q_ENUM_NS(SystemTheme)
+            enum class SystemTheme : quint8
+        {
+            Unknown,
+            Light,
+            Dark,
+            HighContrast
+        };
+        Q_ENUM_NS(SystemTheme)
 
-enum class SystemButtonType : quint8
-{
-    Unknown,
-    WindowIcon,
-    Help,
-    Minimize,
-    Maximize,
-    Restore,
-    Close,
-    Last = Close
-};
-Q_ENUM_NS(SystemButtonType)
-
-#ifdef Q_OS_WINDOWS
-enum class DwmColorizationArea : quint8
-{
-    None,
-    StartMenu_TaskBar_ActionCenter,
-    TitleBar_WindowBorder,
-    All
-};
-Q_ENUM_NS(DwmColorizationArea)
-#endif // Q_OS_WINDOWS
-
-enum class ButtonState : quint8
-{
-    Normal,
-    Hovered,
-    Pressed,
-    Released
-};
-Q_ENUM_NS(ButtonState)
+            enum class SystemButtonType : quint8
+        {
+            Unknown,
+            WindowIcon,
+            Help,
+            Minimize,
+            Maximize,
+            Restore,
+            Close,
+            Last = Close
+        };
+        Q_ENUM_NS(SystemButtonType)
 
 #ifdef Q_OS_WINDOWS
-enum class WindowsVersion : quint8
-{
-    _2000,
-    _XP,
-    _XP_64,
-    _Vista,
-    _Vista_SP1,
-    _Vista_SP2,
-    _7,
-    _7_SP1,
-    _8,
-    _8_1,
-    _8_1_Update1,
-    _10_1507,
-    _10_1511,
-    _10_1607,
-    _10_1703,
-    _10_1709,
-    _10_1803,
-    _10_1809,
-    _10_1903,
-    _10_1909,
-    _10_2004,
-    _10_20H2,
-    _10_21H1,
-    _10_21H2,
-    _10_22H2,
-    _11_21H2,
-    _11_22H2,
-
-    _WS_03 = _XP_64, // Windows Server 2003
-    _10 = _10_1507,
-    _11 = _11_21H2,
-
-    Latest = _11_22H2
-};
-Q_ENUM_NS(WindowsVersion)
+            enum class DwmColorizationArea : quint8
+        {
+            None,
+            StartMenu_TaskBar_ActionCenter,
+            TitleBar_WindowBorder,
+            All
+        };
+        Q_ENUM_NS(DwmColorizationArea)
 #endif // Q_OS_WINDOWS
 
-enum class BlurMode : quint8
-{
-    Disable, // Do not enable blur behind window
-    Default, // Use platform default blur mode
-    Windows_Aero, // Windows only, use the traditional DWM blur
-    Windows_Acrylic, // Windows only, use the Acrylic blur
-    Windows_Mica, // Windows only, use the Mica material
-    Windows_MicaAlt // Windows only, use the Mica Alt material
-};
-Q_ENUM_NS(BlurMode)
-
-enum class WallpaperAspectStyle : quint8
-{
-    Fill, // Keep aspect ratio to fill, expand/crop if necessary.
-    Fit, // Keep aspect ratio to fill, but don't expand/crop.
-    Stretch, // Ignore aspect ratio to fill.
-    Tile,
-    Center,
-    Span // ???
-};
-Q_ENUM_NS(WallpaperAspectStyle)
+            enum class ButtonState : quint8
+        {
+            Normal,
+            Hovered,
+            Pressed,
+            Released
+        };
+        Q_ENUM_NS(ButtonState)
 
 #ifdef Q_OS_WINDOWS
-enum class RegistryRootKey : quint8
-{
-    ClassesRoot,
-    CurrentUser,
-    LocalMachine,
-    Users,
-    PerformanceData,
-    CurrentConfig,
-    DynData,
-    CurrentUserLocalSettings,
-    PerformanceText,
-    PerformanceNlsText
-};
-Q_ENUM_NS(RegistryRootKey)
+            enum class WindowsVersion : quint8
+        {
+            _2000,
+            _XP,
+            _XP_64,
+            _Vista,
+            _Vista_SP1,
+            _Vista_SP2,
+            _7,
+            _7_SP1,
+            _8,
+            _8_1,
+            _8_1_Update1,
+            _10_1507,
+            _10_1511,
+            _10_1607,
+            _10_1703,
+            _10_1709,
+            _10_1803,
+            _10_1809,
+            _10_1903,
+            _10_1909,
+            _10_2004,
+            _10_20H2,
+            _10_21H1,
+            _10_21H2,
+            _10_22H2,
+            _11_21H2,
+            _11_22H2,
+
+            _WS_03 = _XP_64, // Windows Server 2003
+            _10 = _10_1507,
+            _11 = _11_21H2,
+
+            Latest = _11_22H2
+        };
+        Q_ENUM_NS(WindowsVersion)
 #endif // Q_OS_WINDOWS
 
-enum class WindowEdge : quint8
-{
-    Left   = 1 << 0,
-    Top    = 1 << 1,
-    Right  = 1 << 2,
-    Bottom = 1 << 3
-};
-Q_ENUM_NS(WindowEdge)
-Q_DECLARE_FLAGS(WindowEdges, WindowEdge)
-Q_FLAG_NS(WindowEdges)
-Q_DECLARE_OPERATORS_FOR_FLAGS(WindowEdges)
+            enum class BlurMode : quint8
+        {
+            Disable, // Do not enable blur behind window
+            Default, // Use platform default blur mode
+            Windows_Aero, // Windows only, use the traditional DWM blur
+            Windows_Acrylic, // Windows only, use the Acrylic blur
+            Windows_Mica, // Windows only, use the Mica material
+            Windows_MicaAlt // Windows only, use the Mica Alt material
+        };
+        Q_ENUM_NS(BlurMode)
+
+            enum class WallpaperAspectStyle : quint8
+        {
+            Fill, // Keep aspect ratio to fill, expand/crop if necessary.
+            Fit, // Keep aspect ratio to fill, but don't expand/crop.
+            Stretch, // Ignore aspect ratio to fill.
+            Tile,
+            Center,
+            Span // ???
+        };
+        Q_ENUM_NS(WallpaperAspectStyle)
 
 #ifdef Q_OS_WINDOWS
-enum class DpiAwareness : quint8
-{
-    Unknown,
-    Unaware,
-    System,
-    PerMonitor,
-    PerMonitorVersion2,
-    Unaware_GdiScaled
-};
-Q_ENUM_NS(DpiAwareness)
+            enum class RegistryRootKey : quint8
+        {
+            ClassesRoot,
+            CurrentUser,
+            LocalMachine,
+            Users,
+            PerformanceData,
+            CurrentConfig,
+            DynData,
+            CurrentUserLocalSettings,
+            PerformanceText,
+            PerformanceNlsText
+        };
+        Q_ENUM_NS(RegistryRootKey)
 #endif // Q_OS_WINDOWS
 
-enum class WindowCornerStyle : quint8
-{
-    Default,
-    Square,
-    Round
-};
-Q_ENUM_NS(WindowCornerStyle)
+            enum class WindowEdge : quint8
+        {
+            Left = 1 << 0,
+            Top = 1 << 1,
+            Right = 1 << 2,
+            Bottom = 1 << 3
+        };
+        Q_ENUM_NS(WindowEdge)
+            Q_DECLARE_FLAGS(WindowEdges, WindowEdge)
+            Q_FLAG_NS(WindowEdges)
+            Q_DECLARE_OPERATORS_FOR_FLAGS(WindowEdges)
 
-struct VersionInfo
-{
-    struct {
-        unsigned long num = 0;
-        const char *str = nullptr;
-    } version = {};
-    struct {
-        const char *hash = nullptr;
-        const char *subject = nullptr;
-        const char *author = nullptr;
-        const char *datetime = nullptr;
-        const char *branch = nullptr;
-    } commit = {};
-    struct {
-        const char *name = nullptr;
-        const char *version = nullptr;
-        const char *vendor = nullptr;
-    } compiler = {};
-    struct {
-        const char *cmake_version = nullptr;
-        const char *configure_datetime = nullptr;
-        const char *generator = nullptr;
-        const char *architecture = nullptr;
-        bool is_debug = false;
-        bool is_static = false;
-    } build = {};
-};
+#ifdef Q_OS_WINDOWS
+            enum class DpiAwareness : quint8
+        {
+            Unknown,
+            Unaware,
+            System,
+            PerMonitor,
+            PerMonitorVersion2,
+            Unaware_GdiScaled
+        };
+        Q_ENUM_NS(DpiAwareness)
+#endif // Q_OS_WINDOWS
 
-struct Dpi
-{
-    quint32 x = 0;
-    quint32 y = 0;
+            enum class WindowCornerStyle : quint8
+        {
+            Default,
+            Square,
+            Round
+        };
+        Q_ENUM_NS(WindowCornerStyle)
 
-    friend constexpr bool operator==(const Dpi &lhs, const Dpi &rhs) noexcept
+            struct VersionInfo
+        {
+            struct {
+                unsigned long num = 0;
+                const char* str = nullptr;
+            } version = {};
+            struct {
+                const char* hash = nullptr;
+                const char* subject = nullptr;
+                const char* author = nullptr;
+                const char* datetime = nullptr;
+                const char* branch = nullptr;
+            } commit = {};
+            struct {
+                const char* name = nullptr;
+                const char* version = nullptr;
+                const char* vendor = nullptr;
+            } compiler = {};
+            struct {
+                const char* cmake_version = nullptr;
+                const char* configure_datetime = nullptr;
+                const char* generator = nullptr;
+                const char* architecture = nullptr;
+                bool is_debug = false;
+                bool is_static = false;
+            } build = {};
+        };
+
+        struct Dpi
+        {
+            quint32 x = 0;
+            quint32 y = 0;
+
+            friend constexpr bool operator==(const Dpi& lhs, const Dpi& rhs) noexcept
+            {
+                return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
+            }
+
+            friend constexpr bool operator!=(const Dpi& lhs, const Dpi& rhs) noexcept
+            {
+                return !operator==(lhs, rhs);
+            }
+
+            friend constexpr bool operator>(const Dpi& lhs, const Dpi& rhs) noexcept
+            {
+                return ((lhs.x * lhs.y) > (rhs.x * rhs.y));
+            }
+
+            friend constexpr bool operator>=(const Dpi& lhs, const Dpi& rhs) noexcept
+            {
+                return (operator>(lhs, rhs) || operator==(lhs, rhs));
+            }
+
+            friend constexpr bool operator<(const Dpi& lhs, const Dpi& rhs) noexcept
+            {
+                return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
+            }
+
+            friend constexpr bool operator<=(const Dpi& lhs, const Dpi& rhs) noexcept
+            {
+                return (operator<(lhs, rhs) || operator==(lhs, rhs));
+            }
+        };
+
+    } // namespace Global
+
+    FRAMELESSHELPER_CORE_API void FramelessHelperCoreInitialize();
+    FRAMELESSHELPER_CORE_API void FramelessHelperCoreUninitialize();
+    FRAMELESSHELPER_CORE_API Global::VersionInfo FramelessHelperVersion();
+    FRAMELESSHELPER_CORE_API void FramelessHelperEnableThemeAware();
+    FRAMELESSHELPER_CORE_API void FramelessHelperPrintLogo();
+
+    namespace FramelessHelper
     {
-        return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
+        namespace Core
+        {
+            inline void initialize() { FramelessHelperCoreInitialize(); }
+            inline void uninitialize() { FramelessHelperCoreUninitialize(); }
+            inline Global::VersionInfo version() { return FramelessHelperVersion(); }
+            inline void setApplicationOSThemeAware() { FramelessHelperEnableThemeAware(); }
+            inline void outputLogo() { FramelessHelperPrintLogo(); }
+        }
     }
 
-    friend constexpr bool operator!=(const Dpi &lhs, const Dpi &rhs) noexcept
-    {
-        return !operator==(lhs, rhs);
-    }
-
-    friend constexpr bool operator>(const Dpi &lhs, const Dpi &rhs) noexcept
-    {
-        return ((lhs.x * lhs.y) > (rhs.x * rhs.y));
-    }
-
-    friend constexpr bool operator>=(const Dpi &lhs, const Dpi &rhs) noexcept
-    {
-        return (operator>(lhs, rhs) || operator==(lhs, rhs));
-    }
-
-    friend constexpr bool operator<(const Dpi &lhs, const Dpi &rhs) noexcept
-    {
-        return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
-    }
-
-    friend constexpr bool operator<=(const Dpi &lhs, const Dpi &rhs) noexcept
-    {
-        return (operator<(lhs, rhs) || operator==(lhs, rhs));
-    }
-};
-
-} // namespace Global
-
-FRAMELESSHELPER_CORE_API void FramelessHelperCoreInitialize();
-FRAMELESSHELPER_CORE_API void FramelessHelperCoreUninitialize();
-FRAMELESSHELPER_CORE_API Global::VersionInfo FramelessHelperVersion();
-FRAMELESSHELPER_CORE_API void FramelessHelperEnableThemeAware();
-FRAMELESSHELPER_CORE_API void FramelessHelperPrintLogo();
-
-namespace FramelessHelper::Core
-{
-inline void initialize() { FramelessHelperCoreInitialize(); }
-inline void uninitialize() { FramelessHelperCoreUninitialize(); }
-inline Global::VersionInfo version() { return FramelessHelperVersion(); }
-inline void setApplicationOSThemeAware() { FramelessHelperEnableThemeAware(); }
-inline void outputLogo() { FramelessHelperPrintLogo(); }
-} // namespace FramelessHelper::Core
-
-FRAMELESSHELPER_END_NAMESPACE
+}
 
 #ifndef QT_NO_DEBUG_STREAM
 QT_BEGIN_NAMESPACE
