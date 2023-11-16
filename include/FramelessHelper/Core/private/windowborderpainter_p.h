@@ -25,7 +25,6 @@
 #pragma once
 
 #include <FramelessHelper/Core/framelesshelpercore_global.h>
-#include <optional>
 
 #if FRAMELESSHELPER_CONFIG(border_painter)
 

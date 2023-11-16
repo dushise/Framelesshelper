@@ -36,7 +36,6 @@
 #include "framelesshelpercore_global_p.h"
 #include "versionnumber_p.h"
 #include "scopeguard_p.h"
-#include <optional>
 #include <QtCore/qhash.h>
 #include <QtCore/qloggingcategory.h>
 #include <QtCore/qabstracteventdispatcher.h>
@@ -641,25 +640,25 @@ static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
 };
 #undef DEFINE_WIN32_MESSAGE
 
-std::optional<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd)
+QSharedPointer<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd)
 {
     Q_ASSERT(hwnd);
     if (!hwnd) {
-        return std::nullopt;
+        return nullptr;
     }
     // Use "MONITOR_DEFAULTTONEAREST" here so that we can still get the correct
     // monitor even if the window is minimized.
     const HMONITOR monitor = ::MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
     if (!monitor) {
         WARNING << Utils::getSystemErrorMessage(kMonitorFromWindow);
-        return std::nullopt;
+        return nullptr;
     }
-    MONITORINFOEXW monitorInfo;
-    SecureZeroMemory(&monitorInfo, sizeof(monitorInfo));
-    monitorInfo.cbSize = sizeof(monitorInfo);
-    if (::GetMonitorInfoW(monitor, &monitorInfo) == FALSE) {
+    QSharedPointer<MONITORINFOEXW> monitorInfo(new MONITORINFOEXW);
+    SecureZeroMemory(&(*monitorInfo), sizeof(*monitorInfo));
+    monitorInfo->cbSize = sizeof(monitorInfo);
+    if (::GetMonitorInfoW(monitor, &(*monitorInfo)) == FALSE) {
         WARNING << Utils::getSystemErrorMessage(kGetMonitorInfoW);
-        return std::nullopt;
+        return nullptr;
     }
     return monitorInfo;
 };
@@ -696,7 +695,7 @@ static inline QString dwmColorKeyName()
 
 static inline bool doCompareWindowsVersion(const VersionNumber &targetOsVer)
 {
-    static const auto currentOsVer = []() -> std::optional<VersionNumber> {
+    static const std::shared_ptr<VersionNumber> currentOsVer = []() -> std::shared_ptr<VersionNumber> {
         if (API_NT_AVAILABLE(RtlGetVersion)) {
             using RtlGetVersionPtr = _NTSTATUS(WINAPI *)(PRTL_OSVERSIONINFOW);
             const auto pRtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(SysApiLoader::instance()->get(kntdll, kRtlGetVersion));
@@ -704,13 +703,13 @@ static inline bool doCompareWindowsVersion(const VersionNumber &targetOsVer)
             SecureZeroMemory(&osvi, sizeof(osvi));
             osvi.dwOSVersionInfoSize = sizeof(osvi);
             if (pRtlGetVersion(reinterpret_cast<PRTL_OSVERSIONINFOW>(&osvi)) == _STATUS_SUCCESS) {
-                return VersionNumber{ osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber };
+                return std::shared_ptr<VersionNumber>(new VersionNumber( { osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber }));
             }
         }
-        return std::nullopt;
+        return nullptr;
     }();
-    if (currentOsVer.has_value()) {
-        return (currentOsVer >= targetOsVer);
+    if (currentOsVer) {
+        return (*currentOsVer >= targetOsVer);
     }
     // We can fallback to "VerifyVersionInfoW" if we can't determine the current system
     // version, but this function will be affected by the manifest file of your application.
@@ -778,12 +777,12 @@ static inline bool moveWindowToMonitor(const HWND hwnd, const MONITORINFOEXW &ac
     if (!hwnd) {
         return false;
     }
-    const std::optional<MONITORINFOEXW> currentMonitor = getMonitorForWindow(hwnd);
-    if (!currentMonitor.has_value()) {
+    const QSharedPointer<MONITORINFOEXW> currentMonitor = getMonitorForWindow(hwnd);
+    if (currentMonitor.isNull()) {
         WARNING << "Failed to retrieve the window's monitor.";
         return false;
     }
-    const RECT currentMonitorRect = currentMonitor.value().rcMonitor;
+    const RECT currentMonitorRect = (*currentMonitor).rcMonitor;
     const RECT activeMonitorRect = activeMonitor.rcMonitor;
     // We are in the same monitor, nothing to adjust here.
     if (currentMonitorRect == activeMonitorRect) {
@@ -815,7 +814,8 @@ static inline int getSystemMetrics2(const int index, const bool horizontal, cons
     if (dpi == 0) {
         return 0;
     }
-    if (const int result = _GetSystemMetricsForDpi2(index, dpi); result > 0) {
+    const int result = _GetSystemMetricsForDpi2(index, dpi);
+    if ( result > 0) {
         return result;
     }
     static constexpr const auto defaultDpi = qreal(USER_DEFAULT_SCREEN_DPI);
@@ -833,7 +833,8 @@ static inline int getSystemMetrics2(const WId windowId, const int index, const b
     const UINT realDpi = Utils::getWindowDpi(windowId, horizontal);
     {
         const UINT dpi = (scaled ? realDpi : USER_DEFAULT_SCREEN_DPI);
-        if (const int result = _GetSystemMetricsForDpi2(index, dpi); result > 0) {
+        const int result = _GetSystemMetricsForDpi2(index, dpi);
+        if (result > 0) {
             return result;
         }
     }
@@ -1425,22 +1426,24 @@ bool Utils::showSystemMenu(const WId windowId, const QPoint &pos, const bool sel
     // The default menu item will appear in bold font. There can only be one default
     // menu item per menu at most. Set the item ID to "UINT_MAX" (or simply "-1")
     // can clear the default item for the given menu.
-    std::optional<UINT> defaultItemId = std::nullopt;
+    UINT defaultItemId; bool isSet = false;
     if (WindowsVersionHelper::isWin11OrGreater()) {
         if (maxOrFull) {
             if (!removeRestore) {
                 defaultItemId = SC_RESTORE;
+                isSet = true;
             }
         } else {
             if (!removeMaximize) {
                 defaultItemId = SC_MAXIMIZE;
+                isSet = true;
             }
         }
     }
-    if (!(defaultItemId.has_value() || removeClose)) {
+    if (!(isSet || removeClose)) {
         defaultItemId = SC_CLOSE;
     }
-    if (::SetMenuDefaultItem(hMenu, defaultItemId.value_or(UINT_MAX), FALSE) == FALSE) {
+    if (::SetMenuDefaultItem(hMenu, isSet? defaultItemId:UINT_MAX, FALSE) == FALSE) {
         WARNING << getSystemErrorMessage(kSetMenuDefaultItem);
     }
 
@@ -1483,13 +1486,13 @@ bool Utils::isFullScreen(const WId windowId)
         WARNING << getSystemErrorMessage(kGetWindowRect);
         return false;
     }
-    const std::optional<MONITORINFOEXW> mi = getMonitorForWindow(hwnd);
-    if (!mi.has_value()) {
+    const QSharedPointer<MONITORINFOEXW> mi = getMonitorForWindow(hwnd);
+    if (mi.isNull()) {
         WARNING << "Failed to retrieve the window's monitor.";
         return false;
     }
     // Compare to the full area of the screen, not the work area.
-    return (windowRect == mi.value().rcMonitor);
+    return (windowRect == (*mi).rcMonitor);
 }
 
 bool Utils::isWindowNoState(const WId windowId)
@@ -2413,24 +2416,24 @@ bool Utils::setBlurBehindWindowEnabled(const WId windowId, const BlurMode mode, 
             extraData->mica = false;
             std::ignore = updateWindowFrameMargins(windowId, false);
         };
-        static const auto userPreferredBlurMode = []() -> std::optional<BlurMode> {
+        static const std::shared_ptr<BlurMode> userPreferredBlurMode = []() -> std::shared_ptr<BlurMode> {
             const QString option = qEnvironmentVariable("FRAMELESSHELPER_BLUR_MODE");
             if (option.isEmpty()) {
-                return std::nullopt;
+                return nullptr;
             }
             if (option.contains(FRAMELESSHELPER_STRING_LITERAL("MICAALT"), Qt::CaseInsensitive)) {
-                return BlurMode::Windows_MicaAlt;
+                return std::shared_ptr<BlurMode>(new BlurMode(BlurMode::Windows_MicaAlt)) ;
             }
             if (option.contains(FRAMELESSHELPER_STRING_LITERAL("MICA"), Qt::CaseInsensitive)) {
-                return BlurMode::Windows_Mica;
+                return std::shared_ptr<BlurMode>(new BlurMode(BlurMode::Windows_Mica));
             }
             if (option.contains(FRAMELESSHELPER_STRING_LITERAL("ACRYLIC"), Qt::CaseInsensitive)) {
-                return BlurMode::Windows_Acrylic;
+                return std::shared_ptr<BlurMode>(new BlurMode(BlurMode::Windows_Acrylic));
             }
             if (option.contains(FRAMELESSHELPER_STRING_LITERAL("AERO"), Qt::CaseInsensitive)) {
-                return BlurMode::Windows_Aero;
+                return std::shared_ptr<BlurMode>(new BlurMode(BlurMode::Windows_Aero));
             }
-            return std::nullopt;
+            return nullptr;
         }();
         static constexpr const auto kDefaultAcrylicOpacity = 0.8f;
         static const auto acrylicOpacity = []() -> float {
@@ -2477,7 +2480,7 @@ bool Utils::setBlurBehindWindowEnabled(const WId windowId, const BlurMode mode, 
             Q_UNREACHABLE_RETURN(BlurMode::Default);
             QT_WARNING_POP
         }();
-        const BlurMode blurMode = ((recommendedBlurMode == BlurMode::Disable) ? BlurMode::Disable : userPreferredBlurMode.value_or(recommendedBlurMode));
+        const BlurMode blurMode = ((recommendedBlurMode == BlurMode::Disable) ? BlurMode::Disable : userPreferredBlurMode?*userPreferredBlurMode:recommendedBlurMode);
         if (blurMode == BlurMode::Disable) {
             bool result = true;
             if (WindowsVersionHelper::isWin1122H2OrGreater()) {
@@ -3082,8 +3085,8 @@ bool Utils::bringWindowToFront(const WId windowId)
         // The foreground window can be NULL, it's not an API error.
         return true;
     }
-    const std::optional<MONITORINFOEXW> activeMonitor = getMonitorForWindow(oldForegroundWindow);
-    if (!activeMonitor.has_value()) {
+    const QSharedPointer<MONITORINFOEXW> activeMonitor = getMonitorForWindow(oldForegroundWindow);
+    if (activeMonitor.isNull()) {
         WARNING << "Failed to retrieve the window's monitor.";
         return false;
     }
@@ -3097,7 +3100,7 @@ bool Utils::bringWindowToFront(const WId windowId)
         // Once we've been restored, throw us on the active monitor.
         // When the window is restored, it will always become the foreground window.
         // So return early here, we don't need the following code to bring it to front.
-        return moveWindowToMonitor(hwnd, activeMonitor.value());
+        return moveWindowToMonitor(hwnd, *activeMonitor);
     }
     // OK, our window is not minimized, so now we will try to bring it to front manually.
     // First try to send a message to the current foreground window to check whether
@@ -3139,7 +3142,7 @@ bool Utils::bringWindowToFront(const WId windowId)
         return false;
     }
     // Throw us on the active monitor.
-    return moveWindowToMonitor(hwnd, activeMonitor.value());
+    return moveWindowToMonitor(hwnd, *activeMonitor);
 }
 
 QPoint Utils::getWindowPlacementOffset(const WId windowId)
@@ -3159,13 +3162,13 @@ QPoint Utils::getWindowPlacementOffset(const WId windowId)
     if (exStyle & WS_EX_TOOLWINDOW) {
         return {};
     }
-    const std::optional<MONITORINFOEXW> mi = getMonitorForWindow(hwnd);
-    if (!mi.has_value()) {
+    const QSharedPointer<MONITORINFOEXW> mi = getMonitorForWindow(hwnd);
+    if (mi.isNull()) {
         WARNING << "Failed to retrieve the window's monitor.";
         return {};
     }
-    const RECT work = mi.value().rcWork;
-    const RECT total = mi.value().rcMonitor;
+    const RECT work = (*mi).rcWork;
+    const RECT total = (*mi).rcMonitor;
     return {work.left - total.left, work.top - total.top};
 }
 

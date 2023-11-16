@@ -26,7 +26,6 @@
 
 #include <FramelessHelper/Core/framelesshelpercore_global.h>
 #include <QtCore/qvariant.h>
-#include <optional>
 #include <memory>
 
 #ifdef Q_OS_WINDOWS

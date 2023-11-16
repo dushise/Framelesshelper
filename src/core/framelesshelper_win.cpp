@@ -36,7 +36,6 @@
 #include "framelesshelper_windows.h"
 #include "framelesshelpercore_global_p.h"
 #include "scopeguard_p.h"
-#include <optional>
 #include <memory>
 #include <QtCore/qhash.h>
 #include <QtCore/qvariant.h>
@@ -148,7 +147,7 @@ struct FramelessHelperWinInternal
 };
 Q_GLOBAL_STATIC(FramelessHelperWinInternal, g_internalData)
 
-extern std::optional<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd);
+extern QSharedPointer<MONITORINFOEXW> getMonitorForWindow(const HWND hwnd);
 
 static inline QByteArray qtNativeEventType()
 {
@@ -376,8 +375,8 @@ bool FramelessHelperWin::nativeEventFilter(const QByteArray &eventType, void *me
     };
 #endif // (QT_VERSION < QT_VERSION_CHECK(6, 5, 1))
 
-    const auto emulateClientAreaMessage = [hWnd, uMsg, wParam, lParam](const std::optional<int> &overrideMessage = std::nullopt) -> void {
-        const int myMsg = overrideMessage.value_or(uMsg);
+    const auto emulateClientAreaMessage = [hWnd, uMsg, wParam, lParam](int* overrideMessage=nullptr) -> void {
+        const int myMsg = overrideMessage==nullptr?uMsg:*overrideMessage;
         const auto wparam = [myMsg, wParam]() -> WPARAM {
             if (myMsg == WM_NCMOUSELEAVE) {
                 // wParam is always ignored in mouse leave messages, but here we
@@ -651,12 +650,12 @@ bool FramelessHelperWin::nativeEventFilter(const QByteArray &eventType, void *me
                 // we have to use another way to judge this if we are running
                 // on Windows 7 or Windows 8.
                 if (WindowsVersionHelper::isWin8Point1OrGreater()) {
-                    const std::optional<MONITORINFOEXW> monitorInfo = getMonitorForWindow(hWnd);
-                    if (!monitorInfo.has_value()) {
+                    const QSharedPointer<MONITORINFOEXW> monitorInfo = getMonitorForWindow(hWnd);
+                    if (!monitorInfo.isNull()) {
                         WARNING << "Failed to retrieve the window's monitor.";
                         break;
                     }
-                    const RECT monitorRect = monitorInfo.value().rcMonitor;
+                    const RECT monitorRect = (*monitorInfo).rcMonitor;
                     // This helper can be used to determine if there's a
                     // auto-hide taskbar on the given edge of the monitor
                     // we're currently on.
@@ -1060,7 +1059,8 @@ bool FramelessHelperWin::nativeEventFilter(const QByteArray &eventType, void *me
             if (currentWindowPart != WindowPart::ChromeButton) {
                 std::ignore = data->callbacks->resetQtGrabbedControl();
                 if (data->mouseLeaveBlocked) {
-                    emulateClientAreaMessage(WM_NCMOUSELEAVE);
+                    int windowMsg = WM_NCMOUSELEAVE;
+                    emulateClientAreaMessage(&windowMsg);
                 }
             }
 
@@ -1104,7 +1104,8 @@ bool FramelessHelperWin::nativeEventFilter(const QByteArray &eventType, void *me
             if (data->mouseLeaveBlocked) {
                 // The mouse is moving from the chrome button to other non-client area, we should
                 // emulate a WM_MOUSELEAVE message to reset the button state.
-                emulateClientAreaMessage(WM_NCMOUSELEAVE);
+                int windowMsg = WM_NCMOUSELEAVE;
+                emulateClientAreaMessage(&windowMsg);
             }
 
             if (currentWindowPart == WindowPart::Outside) {

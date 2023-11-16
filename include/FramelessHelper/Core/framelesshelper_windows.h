@@ -1384,15 +1384,15 @@ _AdjustWindowRectExForDpi2(
 
 EXTERN_C_END
 
-inline constexpr const unsigned char kAutoHideTaskBarThickness = 2; // The thickness of an auto-hide taskbar in pixels.
-inline constexpr const wchar_t kDwmRegistryKey[] = LR"(Software\Microsoft\Windows\DWM)";
-inline constexpr const wchar_t kPersonalizeRegistryKey[] = LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)";
-inline constexpr const wchar_t kThemeSettingChangeEventName[] = L"ImmersiveColorSet";
-inline constexpr const wchar_t kDwmColorKeyName[] = L"ColorPrevalence";
-inline constexpr const wchar_t kSystemDarkThemeResourceName[] = L"DarkMode_Explorer";
-inline constexpr const wchar_t kSystemLightThemeResourceName[] = L"Explorer";
-inline constexpr const wchar_t kDesktopRegistryKey[] = LR"(Control Panel\Desktop)";
-inline constexpr const wchar_t kDarkModePropertyName[] = L"UseImmersiveDarkModeColors";
+constexpr const unsigned char kAutoHideTaskBarThickness = 2; // The thickness of an auto-hide taskbar in pixels.
+constexpr const wchar_t kDwmRegistryKey[] = LR"(Software\Microsoft\Windows\DWM)";
+constexpr const wchar_t kPersonalizeRegistryKey[] = LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)";
+constexpr const wchar_t kThemeSettingChangeEventName[] = L"ImmersiveColorSet";
+constexpr const wchar_t kDwmColorKeyName[] = L"ColorPrevalence";
+constexpr const wchar_t kSystemDarkThemeResourceName[] = L"DarkMode_Explorer";
+constexpr const wchar_t kSystemLightThemeResourceName[] = L"Explorer";
+constexpr const wchar_t kDesktopRegistryKey[] = LR"(Control Panel\Desktop)";
+constexpr const wchar_t kDarkModePropertyName[] = L"UseImmersiveDarkModeColors";
 
 inline constexpr bool operator==(const POINT &lhs, const POINT &rhs) noexcept
 {

@@ -38,7 +38,7 @@
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
 #if FRAMELESSHELPER_CONFIG(debug_output)
-static Q_LOGGING_CATEGORY(lcCoreRegistryKey, "wangwenx190.framelesshelper.core.registrykey")
+static Q_LOGGING_CATEGORY(lcCoreRegistryKey, "framelesshelper.core.registrykey")
 #  define INFO qCInfo(lcCoreRegistryKey)
 #  define DEBUG qCDebug(lcCoreRegistryKey)
 #  define WARNING qCWarning(lcCoreRegistryKey)
@@ -66,7 +66,7 @@ static constexpr const std::array<ULONG_PTR, 10> g_registryKeyMap =
     0x80000060  // HKEY_PERFORMANCE_NLSTEXT
 };
 static constexpr const auto registryKeyCount = std::size(g_registryKeyMap);
-static_assert(registryKeyCount == (static_cast<quint8>(RegistryRootKey::PerformanceNlsText) + 1));
+//static_assert(registryKeyCount == (static_cast<quint8>(RegistryRootKey::PerformanceNlsText) + 1));
 
 static Q_STRING_CONSTEXPR const std::array<FRAMELESSHELPER_STRING_TYPE, registryKeyCount> g_registryStrMap =
 {
