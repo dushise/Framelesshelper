@@ -25,7 +25,6 @@
 #pragma once
 
 #include <FramelessHelper/Widgets/framelesshelperwidgets_global.h>
-#include <optional>
 
 #if FRAMELESSHELPER_CONFIG(system_button)
 
@@ -50,7 +49,7 @@ public:
     QColor activeForegroundColor = {};
     QColor inactiveForegroundColor = {};
     bool active = false;
-    std::optional<int> glyphSize = std::nullopt;
+    int glyphSize = 0;
 };
 
 FRAMELESSHELPER_END_NAMESPACE

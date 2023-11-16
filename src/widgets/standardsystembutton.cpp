@@ -190,7 +190,7 @@ bool StandardSystemButton::isActive() const
 int StandardSystemButton::glyphSize() const
 {
     Q_D(const StandardSystemButton);
-    return d->glyphSize.value_or(FramelessManagerPrivate::getIconFont().pointSize());
+    return d->glyphSize==0? FramelessManagerPrivate::getIconFont().pointSize():d->glyphSize;
 }
 
 void StandardSystemButton::setHoverColor(const QColor &value)
@@ -338,8 +338,8 @@ void StandardSystemButton::paintEvent(QPaintEvent *event)
         }());
         painter.setFont([d]() -> QFont {
             QFont font = FramelessManagerPrivate::getIconFont();
-            if (d->glyphSize.has_value()) {
-                font.setPointSize(d->glyphSize.value());
+            if (d->glyphSize!=0) {
+                font.setPointSize(d->glyphSize);
             }
             return font;
         }());

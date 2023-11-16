@@ -26,7 +26,6 @@
 
 #include <FramelessHelper/Widgets/framelesshelperwidgets_global.h>
 #include <QtGui/qfont.h>
-#include <optional>
 
 QT_BEGIN_NAMESPACE
 class QMouseEvent;
@@ -85,9 +84,9 @@ public:
     bool hideWhenClose = false;
     ChromePalette *chromePalette = nullptr;
     bool titleLabelVisible = true;
-    std::optional<QSize> windowIconSize = std::nullopt;
+    QSharedPointer<QSize> windowIconSize = nullptr;
     bool windowIconVisible = false;
-    std::optional<QFont> titleFont = std::nullopt;
+    QSharedPointer<QFont> titleFont = nullptr;
     bool closeTriggered = false;
 
 protected:

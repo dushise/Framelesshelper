@@ -142,7 +142,7 @@ StandardTitleBarPrivate::FontMetrics StandardTitleBarPrivate::titleLabelSize() c
     if (text.isEmpty()) {
         return {};
     }
-    const QFont font = titleFont.value_or(defaultFont());
+    const QFont font = titleFont.isNull()? defaultFont(): *titleFont.data();
     const QFontMetrics fontMetrics(font);
     const int textWidth = Utils::horizontalAdvance(fontMetrics, text);
     return {
@@ -578,7 +578,7 @@ void StandardTitleBar::paintEvent(QPaintEvent *event)
         const QString text = d->window->windowTitle();
         if (!text.isEmpty()) {
             painter.setPen(foregroundColor);
-            painter.setFont(d->titleFont.value_or(d->defaultFont()));
+            painter.setFont(d->titleFont.isNull()?d->defaultFont(): *d->titleFont);
             const auto pos = [this, d]() -> QPoint {
                 const StandardTitleBarPrivate::FontMetrics labelSize = d->titleLabelSize();
                 const int titleBarWidth = width();
@@ -636,7 +636,7 @@ void StandardTitleBar::setTitleLabelVisible(const bool value)
 QSize StandardTitleBar::windowIconSize() const
 {
     Q_D(const StandardTitleBar);
-    return d->windowIconSize.value_or(kDefaultWindowIconSize);
+    return d->windowIconSize.isNull()?kDefaultWindowIconSize:*d->windowIconSize;
 }
 
 void StandardTitleBar::setWindowIconSize(const QSize &value)
@@ -649,7 +649,14 @@ void StandardTitleBar::setWindowIconSize(const QSize &value)
         return;
     }
     Q_D(StandardTitleBar);
-    d->windowIconSize = value;
+    if (d->windowIconSize.isNull())
+    {
+        d->windowIconSize = QSharedPointer<QSize>(new QSize( value));
+    }
+    else
+    {
+        *d->windowIconSize = value;
+    }
     update();
     Q_EMIT windowIconSizeChanged();
 }
@@ -684,7 +691,7 @@ void StandardTitleBar::setWindowIconVisible(const bool value)
 QFont StandardTitleBar::titleFont() const
 {
     Q_D(const StandardTitleBar);
-    return d->titleFont.value_or(QFont());
+    return d->titleFont.isNull()? QFont():*d->titleFont;
 }
 
 void StandardTitleBar::setTitleFont(const QFont &value)
@@ -693,7 +700,10 @@ void StandardTitleBar::setTitleFont(const QFont &value)
         return;
     }
     Q_D(StandardTitleBar);
-    d->titleFont = value;
+    if (d->titleFont.isNull())
+        d->titleFont = QSharedPointer<QFont>(new QFont(value));
+    else
+        *d->titleFont = value;
     update();
     Q_EMIT titleFontChanged();
 }
