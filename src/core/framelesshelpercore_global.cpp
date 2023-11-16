@@ -131,7 +131,7 @@ FramelessData::FramelessData() = default;
 
 FramelessData::~FramelessData() = default;
 
-void FramelessHelperCoreInitialize()
+void PMSoft::FramelessHelperCoreInitialize()
 {
     static bool inited = false;
     if (inited) {
@@ -186,7 +186,7 @@ void FramelessHelperCoreInitialize()
 #endif
 }
 
-void FramelessHelperCoreUninitialize()
+void PMSoft::FramelessHelperCoreUninitialize()
 {
     static bool uninited = false;
     if (uninited) {
@@ -195,7 +195,7 @@ void FramelessHelperCoreUninitialize()
     uninited = true;
 }
 
-VersionInfo FramelessHelperVersion()
+VersionInfo PMSoft::FramelessHelperVersion()
 {
     static const auto result = []() -> VersionInfo {
         VersionInfo vi = {};
@@ -232,7 +232,7 @@ VersionInfo FramelessHelperVersion()
     return result;
 }
 
-void FramelessHelperEnableThemeAware()
+void PMSoft::FramelessHelperEnableThemeAware()
 {
     static bool set = false;
     if (set) {
@@ -258,7 +258,7 @@ void FramelessHelperEnableThemeAware()
 #endif
 }
 
-void FramelessHelperPrintLogo()
+void PMSoft::FramelessHelperPrintLogo()
 {
     static const bool noLogo = (qEnvironmentVariableIntValue("FRAMELESSHELPER_NO_LOGO") != 0);
     if (noLogo) {

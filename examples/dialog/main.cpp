@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
     // Not necessary, but better call this function, before the construction
     // of any Q(Core|Gui)Application instances.
-    FramelessHelperWidgetsInitialize();
+    PMSoft::Widgets::initialize();
 
 #if 0
     if (!qEnvironmentVariableIsSet("QT_WIDGETS_RHI")) {

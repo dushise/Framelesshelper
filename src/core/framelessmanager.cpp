@@ -345,7 +345,7 @@ void FramelessManagerPrivate::updateWindowId(const QObject *window, const WId ne
 
 bool FramelessManagerPrivate::isThemeOverrided() const
 {
-    return (overrideTheme.value_or(SystemTheme::Unknown) != SystemTheme::Unknown);
+    return overrideTheme != SystemTheme::Unknown;
 }
 
 void FramelessManagerPrivate::initialize()
@@ -418,7 +418,7 @@ SystemTheme FramelessManager::systemTheme() const
     Q_D(const FramelessManager);
     // The user's choice has top priority.
     if (d->isThemeOverrided()) {
-        return d->overrideTheme.value();
+        return d->overrideTheme;
     }
     return d->systemTheme;
 }
@@ -444,15 +444,10 @@ WallpaperAspectStyle FramelessManager::wallpaperAspectStyle() const
 void FramelessManager::setOverrideTheme(const SystemTheme theme)
 {
     Q_D(FramelessManager);
-    if ((!d->overrideTheme.has_value() && (theme == SystemTheme::Unknown))
-        || (d->overrideTheme.has_value() && (d->overrideTheme.value() == theme))) {
+    if (d->overrideTheme == theme){
         return;
     }
-    if (theme == SystemTheme::Unknown) {
-        d->overrideTheme = std::nullopt;
-    } else {
-        d->overrideTheme = theme;
-    }
+    d->overrideTheme = theme;
     Q_EMIT systemThemeChanged();
 }
 

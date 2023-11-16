@@ -26,7 +26,6 @@
 
 #include <FramelessHelper/Core/framelesshelpercore_global.h>
 #include <QtCore/qtimer.h>
-#include <optional>
 
 FRAMELESSHELPER_BEGIN_NAMESPACE
 
@@ -62,7 +61,7 @@ public:
     static void updateWindowId(const QObject *window, const WId newWindowId);
 
     Global::SystemTheme systemTheme = Global::SystemTheme::Unknown;
-    std::optional<Global::SystemTheme> overrideTheme = std::nullopt;
+    Global::SystemTheme overrideTheme = Global::SystemTheme::Unknown;
     QColor accentColor = {};
 #ifdef Q_OS_WINDOWS
     Global::DwmColorizationArea colorizationArea = Global::DwmColorizationArea::None;

@@ -73,15 +73,24 @@ public:
 
     Q_NODISCARD QVariant value(const QString &name) const;
     template<typename T>
-    Q_NODISCARD std::optional<T> value(const QString &name) const
+    QSharedPointer<T> value(const QString &name) const
     {
         const QVariant var = value(name);
         if (var.isValid() && !var.isNull()) {
-            return qvariant_cast<T>(var);
+            return QSharedPointer<T>( new T( qvariant_cast<T>(var) ) );
         }
-        return std::nullopt;
+        return nullptr;
     }
 
+    template<typename T>
+	T getValue(const QString& name,T def) const
+	{
+		const QVariant var = value(name);
+		if (var.isValid() && !var.isNull()) {
+			return qvariant_cast<T>(var);
+		}
+		return def;
+	}
 private:
     Global::RegistryRootKey m_rootKey = Global::RegistryRootKey::CurrentUser;
     QString m_subKey = {};

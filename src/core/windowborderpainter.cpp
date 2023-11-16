@@ -95,25 +95,33 @@ WindowBorderPainter::~WindowBorderPainter() = default;
 int WindowBorderPainter::thickness() const
 {
     Q_D(const WindowBorderPainter);
-    return d->thickness.value_or(nativeThickness());
+    if (d->thickness.isNull())
+        return nativeThickness();
+    return *d->thickness;
 }
 
 WindowEdges WindowBorderPainter::edges() const
 {
     Q_D(const WindowBorderPainter);
-    return d->edges.value_or(nativeEdges());
+    if (d->edges.isNull())
+        return nativeEdges();
+    return *d->edges;
 }
 
 QColor WindowBorderPainter::activeColor() const
 {
     Q_D(const WindowBorderPainter);
-    return d->activeColor.value_or(nativeActiveColor());
+    if (d->activeColor.isNull())
+        return nativeActiveColor();
+    return *d->activeColor;
 }
 
 QColor WindowBorderPainter::inactiveColor() const
 {
     Q_D(const WindowBorderPainter);
-    return d->inactiveColor.value_or(nativeInactiveColor());
+    if (d->inactiveColor.isNull())
+        return nativeInactiveColor();
+    return *d->inactiveColor;
 }
 
 int WindowBorderPainter::nativeThickness() const
@@ -165,7 +173,7 @@ void WindowBorderPainter::paint(QPainter *painter, const QSize &size, const bool
     const auto rightTop = QPointF{ qreal(size.width()) - gap, leftTop.y() };
     const auto rightBottom = QPointF{ rightTop.x(), qreal(size.height()) - gap };
     const auto leftBottom = QPointF{ leftTop.x(), rightBottom.y() };
-    const WindowEdges edges = d->edges.value_or(nativeEdges());
+    const WindowEdges edges = d->edges.isNull() ? nativeEdges() : *d->edges;
     if (edges & WindowEdge::Left) {
         lines.append({leftBottom, leftTop});
     }
@@ -187,16 +195,16 @@ void WindowBorderPainter::paint(QPainter *painter, const QSize &size, const bool
     pen.setColor([this, d, active]() -> QColor {
         QColor color = {};
         if (active) {
-            color = d->activeColor.value_or(nativeActiveColor());
+            color = d->activeColor.isNull()?nativeActiveColor(): *d->activeColor;
         } else {
-            color = d->inactiveColor.value_or(nativeInactiveColor());
+            color = d->inactiveColor.isNull()? nativeInactiveColor():*d->inactiveColor;
         }
         if (color.isValid()) {
             return color;
         }
         return (active ? kDefaultBlackColor : kDefaultDarkGrayColor);
     }());
-    pen.setWidth(d->thickness.value_or(nativeThickness()));
+    pen.setWidth( d->thickness.isNull()?nativeThickness():*d->thickness );
     painter->setPen(pen);
     painter->drawLines(lines);
     painter->restore();
@@ -213,7 +221,10 @@ void WindowBorderPainter::setThickness(const int value)
         return;
     }
     Q_D(WindowBorderPainter);
-    d->thickness = value;
+	if (d->thickness.isNull())
+		d->thickness = QSharedPointer<int>(new int(value));
+	else
+		*d->thickness = value;
     Q_EMIT thicknessChanged();
     Q_EMIT shouldRepaint();
 }
@@ -224,7 +235,10 @@ void WindowBorderPainter::setEdges(const Global::WindowEdges value)
         return;
     }
     Q_D(WindowBorderPainter);
-    d->edges = value;
+    if (d->edges.isNull())
+        d->edges = QSharedPointer<Global::WindowEdges>(new Global::WindowEdges(value));
+    else
+        *d->edges  = value;
     Q_EMIT edgesChanged();
     Q_EMIT shouldRepaint();
 }
@@ -239,7 +253,10 @@ void WindowBorderPainter::setActiveColor(const QColor &value)
         return;
     }
     Q_D(WindowBorderPainter);
-    d->activeColor = value;
+    if (d->activeColor.isNull())
+        d->activeColor = QSharedPointer<QColor>(new QColor(value));
+    else
+        *d->activeColor = value;
     Q_EMIT activeColorChanged();
     Q_EMIT shouldRepaint();
 }
@@ -254,7 +271,10 @@ void WindowBorderPainter::setInactiveColor(const QColor &value)
         return;
     }
     Q_D(WindowBorderPainter);
-    d->inactiveColor = value;
+	if (d->inactiveColor.isNull())
+		d->inactiveColor = QSharedPointer<QColor>(new QColor(value));
+	else
+		*d->inactiveColor = value;
     Q_EMIT inactiveColorChanged();
     Q_EMIT shouldRepaint();
 }

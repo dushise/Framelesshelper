@@ -40,28 +40,28 @@ static Q_LOGGING_CATEGORY(lcWidgetsGlobal, "wangwenx190.framelesshelper.widgets.
 #  define CRITICAL QT_NO_QDEBUG_MACRO()
 #endif
 
-void FramelessHelperWidgetsInitialize()
+void Widgets::initialize()
 {
-    static bool inited = false;
-    if (inited) {
-        return;
-    }
-    inited = true;
+	static bool inited = false;
+	if (inited) {
+		return;
+	}
+	inited = true;
 
-    FramelessHelperCoreInitialize();
+	FramelessHelperCoreInitialize();
 }
 
-void FramelessHelperWidgetsUninitialize()
+void Widgets::uninitialize()
 {
-    static bool uninited = false;
-    if (uninited) {
-        return;
-    }
-    uninited = true;
+	static bool uninited = false;
+	if (uninited) {
+		return;
+	}
+	uninited = true;
 
-    // ### TODO: The Widgets module-specific uninitialization.
+	// ### TODO: The Widgets module-specific uninitialization.
 
-    FramelessHelperCoreUninitialize();
+	FramelessHelperCoreUninitialize();
 }
 
 FRAMELESSHELPER_END_NAMESPACE

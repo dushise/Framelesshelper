@@ -40,10 +40,10 @@ public:
     explicit WindowBorderPainterPrivate(WindowBorderPainter *q);
     ~WindowBorderPainterPrivate() override;
 
-    std::optional<int> thickness = std::nullopt;
-    std::optional<Global::WindowEdges> edges = std::nullopt;
-    std::optional<QColor> activeColor = std::nullopt;
-    std::optional<QColor> inactiveColor = std::nullopt;
+    QSharedPointer<int> thickness = nullptr;
+    QSharedPointer<Global::WindowEdges> edges = nullptr;
+    QSharedPointer<QColor> activeColor = nullptr;
+    QSharedPointer<QColor> inactiveColor = nullptr;
 };
 
 FRAMELESSHELPER_END_NAMESPACE

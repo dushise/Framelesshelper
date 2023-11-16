@@ -1117,7 +1117,7 @@ bool Utils::isDwmCompositionEnabled()
         if (!registry.isValid()) {
             return false;
         }
-        const DWORD value = registry.value<DWORD>(kComposition).value_or(0);
+        const DWORD value = registry.getValue<DWORD>(kComposition, 0);
         return (value != 0);
     };
     if (!API_DWM_AVAILABLE(DwmIsCompositionEnabled)) {
@@ -1307,9 +1307,9 @@ DwmColorizationArea Utils::getDwmColorizationArea()
         return DwmColorizationArea::None;
     }
     const RegistryKey themeRegistry(RegistryRootKey::CurrentUser, personalizeRegistryKey());
-    const DWORD themeValue = themeRegistry.isValid() ? themeRegistry.value<DWORD>(dwmColorKeyName()).value_or(0) : 0;
+    const DWORD themeValue = themeRegistry.getValue<DWORD>(dwmColorKeyName(),0);
     const RegistryKey dwmRegistry(RegistryRootKey::CurrentUser, dwmRegistryKey());
-    const DWORD dwmValue = dwmRegistry.isValid() ? dwmRegistry.value<DWORD>(dwmColorKeyName()).value_or(0) : 0;
+    const DWORD dwmValue = dwmRegistry.getValue<DWORD>(dwmColorKeyName(),0);
     const bool theme = (themeValue != 0);
     const bool dwm = (dwmValue != 0);
     if (theme && dwm) {
@@ -2340,7 +2340,7 @@ bool Utils::shouldAppsUseDarkMode_windows()
         if (!registry.isValid()) {
             return false;
         }
-        const DWORD value = registry.value<DWORD>(kAppsUseLightTheme).value_or(0);
+        const DWORD value = registry.getValue<DWORD>(kAppsUseLightTheme, 0); 
         return (value == 0);
     };
     return resultFromRegistry();
@@ -2678,10 +2678,10 @@ WallpaperAspectStyle Utils::getWallpaperAspectStyle()
     if (!registry.isValid()) {
         return defaultStyle;
     }
-    const DWORD wallpaperStyle = registry.value<DWORD>(kWallpaperStyle).value_or(0);
+    const DWORD wallpaperStyle = registry.getValue<DWORD>(kWallpaperStyle,0);
     switch (wallpaperStyle) {
     case 0: {
-        const DWORD tileWallpaper = registry.value<DWORD>(kTileWallpaper).value_or(0);
+        const DWORD tileWallpaper = registry.getValue<DWORD>(kTileWallpaper,0);
         if (tileWallpaper != 0) {
             return WallpaperAspectStyle::Tile;
         }
