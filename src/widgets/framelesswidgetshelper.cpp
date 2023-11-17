@@ -186,14 +186,14 @@ static inline void forceWidgetRepaint(QWidget *widget)
         // A widget will most likely repaint itself if it's size is changed.
         if (!isWidgetFixedSize(widget)) {
             const QSize originalSize = widget->size();
-            static constexpr const auto margins = QMargins{ 1, 1, 1, 1 };
+            static const auto margins = QMargins{ 1, 1, 1, 1 };
             widget->resize(originalSize.shrunkBy(margins));
             widget->resize(originalSize.grownBy(margins));
             widget->resize(originalSize);
         }
         // However, some widgets won't repaint themselves unless their position is changed.
         const QPoint originalPosition = widget->pos();
-        static constexpr const auto offset = QPoint{10, 10};
+        static const auto offset = QPoint{10, 10};
         widget->move(originalPosition - offset);
         widget->move(originalPosition + offset);
         widget->move(originalPosition);
@@ -466,7 +466,7 @@ void FramelessWidgetsHelperPrivate::attach()
         data->callbacks->forceChildrenRepaint = [this]() -> void { repaintAllChildren(); };
         data->callbacks->resetQtGrabbedControl = []() -> bool {
             if (qt_button_down) {
-                static constexpr const auto invalidPos = QPoint{ -99999, -99999 };
+                static const auto invalidPos = QPoint{ -99999, -99999 };
                 const auto event = new QMouseEvent(
                     QEvent::MouseButtonRelease,
                     invalidPos,

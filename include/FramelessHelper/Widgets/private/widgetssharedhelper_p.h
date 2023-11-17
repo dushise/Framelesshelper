@@ -50,16 +50,16 @@ public:
     void setup(QWidget *widget);
 
 #if FRAMELESSHELPER_CONFIG(mica_material)
-    Q_NODISCARD bool isMicaEnabled() const;
+    bool isMicaEnabled() const;
     void setMicaEnabled(const bool value);
-    Q_NODISCARD MicaMaterial *rawMicaMaterial() const;
+    MicaMaterial *rawMicaMaterial() const;
 #endif
 #if FRAMELESSHELPER_CONFIG(border_painter)
-    Q_NODISCARD WindowBorderPainter *rawWindowBorder() const;
+    WindowBorderPainter *rawWindowBorder() const;
 #endif
 
 protected:
-    Q_NODISCARD bool eventFilter(QObject *object, QEvent *event) override;
+    bool eventFilter(QObject *object, QEvent *event) override;
 
 private Q_SLOTS:
     void updateContentsMargins();

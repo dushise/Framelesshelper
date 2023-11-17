@@ -51,6 +51,8 @@ public:
         int width = 0;
         int height = 0;
         int ascent = 0;
+		FontMetrics() {}
+		FontMetrics(int w, int h, int a) :width(w), height(h), ascent(a) {}
     };
 
     explicit StandardTitleBarPrivate(StandardTitleBar *q);

@@ -229,13 +229,16 @@ void WidgetsSharedHelper::emitCustomWindowStateSignals()
     if (!mo) {
         return;
     }
-    if (const int idx = mo->indexOfSignal(QMetaObject::normalizedSignature("hiddenChanged()").constData()); idx >= 0) {
+	int idx = mo->indexOfSignal(QMetaObject::normalizedSignature("hiddenChanged()").constData());
+    if (idx >= 0) {
         QMetaObject::invokeMethod(m_targetWidget, "hiddenChanged");
     }
-    if (const int idx = mo->indexOfSignal(QMetaObject::normalizedSignature("normalChanged()").constData()); idx >= 0) {
+	idx = mo->indexOfSignal(QMetaObject::normalizedSignature("normalChanged()").constData());
+    if (idx >= 0) {
         QMetaObject::invokeMethod(m_targetWidget, "normalChanged");
     }
-    if (const int idx = mo->indexOfSignal(QMetaObject::normalizedSignature("zoomedChanged()").constData()); idx >= 0) {
+	idx = mo->indexOfSignal(QMetaObject::normalizedSignature("zoomedChanged()").constData());
+    if (idx >= 0) {
         QMetaObject::invokeMethod(m_targetWidget, "zoomedChanged");
     }
 }
