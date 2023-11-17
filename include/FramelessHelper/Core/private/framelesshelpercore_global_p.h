@@ -161,19 +161,19 @@ using FramelessDataHash = QHash<QObject *, FramelessDataPtr>;
 FRAMELESSHELPER_END_NAMESPACE
 
 #define DECLARE_SIZE_COMPARE_OPERATORS(Type1, Type2) \
-  bool operator>(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline bool operator>(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return ((lhs.width() * lhs.height()) > (rhs.width() * rhs.height())); \
   } \
-  bool operator>=(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline bool operator>=(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return (operator>(lhs, rhs) || operator==(lhs, rhs)); \
   } \
-  bool operator<(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline bool operator<(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return (operator!=(lhs, rhs) && !operator>(lhs, rhs)); \
   } \
-  bool operator<=(const Type1 &lhs, const Type2 &rhs) noexcept \
+  inline bool operator<=(const Type1 &lhs, const Type2 &rhs) noexcept \
   { \
       return (operator<(lhs, rhs) || operator==(lhs, rhs)); \
   }
