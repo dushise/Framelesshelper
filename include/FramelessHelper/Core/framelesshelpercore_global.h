@@ -358,34 +358,39 @@ namespace PMSoft {
         constexpr const int kDefaultTitleBarFontPointSize = 11;
         constexpr const int kDefaultTitleBarContentsMargin = 10;
         constexpr const int kMacOSChromeButtonAreaWidth = 60;
-        constexpr const QSize kDefaultWindowIconSize = { 16, 16 };
+        const QSize kDefaultWindowIconSize = { 16, 16 };
         // We have to use "qRound()" here because "std::round()" is not constexpr, yet.
-        constexpr const QSize kDefaultSystemButtonSize = { qRound(qreal(kDefaultTitleBarHeight) * 1.5), kDefaultTitleBarHeight };
-        constexpr const QSize kDefaultSystemButtonIconSize = kDefaultWindowIconSize;
-        constexpr const QSize kDefaultWindowSize = { 160, 160 }; // Value taken from Windows QPA.
+        const QSize kDefaultSystemButtonSize = { qRound(qreal(kDefaultTitleBarHeight) * 1.5), kDefaultTitleBarHeight };
+        const QSize kDefaultSystemButtonIconSize = kDefaultWindowIconSize;
+        const QSize kDefaultWindowSize = { 160, 160 }; // Value taken from Windows QPA.
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-#  define kDefaultWhiteColor QColorConstants::White
-#  define kDefaultBlackColor QColorConstants::Black
-#  define kDefaultTransparentColor QColorConstants::Transparent
-#  define kDefaultLightGrayColor QColorConstants::LightGray
-#  define kDefaultDarkGrayColor QColorConstants::DarkGray
-#else // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-        Q_COLOR_CONSTEXPR const QColor kDefaultWhiteColor = { 255, 255, 255 }; // #FFFFFF
-        Q_COLOR_CONSTEXPR const QColor kDefaultBlackColor = { 0, 0, 0 }; // #000000
-        Q_COLOR_CONSTEXPR const QColor kDefaultTransparentColor = { 0, 0, 0, 0 };
-        Q_COLOR_CONSTEXPR const QColor kDefaultLightGrayColor = { 211, 211, 211 }; // #D3D3D3
-        Q_COLOR_CONSTEXPR const QColor kDefaultDarkGrayColor = { 169, 169, 169 }; // #A9A9A9
-#endif // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+//#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+//#  define kDefaultWhiteColor QColorConstants::White
+//#  define kDefaultBlackColor QColorConstants::Black
+//#  define kDefaultTransparentColor QColorConstants::Transparent
+//#  define kDefaultLightGrayColor QColorConstants::LightGray
+//#  define kDefaultDarkGrayColor QColorConstants::DarkGray
+//#else // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+//        Q_COLOR_CONSTEXPR const QColor kDefaultWhiteColor = { 255, 255, 255 }; // #FFFFFF
+//        Q_COLOR_CONSTEXPR const QColor kDefaultBlackColor = { 0, 0, 0 }; // #000000
+//        Q_COLOR_CONSTEXPR const QColor kDefaultTransparentColor = { 0, 0, 0, 0 };
+//        Q_COLOR_CONSTEXPR const QColor kDefaultLightGrayColor = { 211, 211, 211 }; // #D3D3D3
+//        Q_COLOR_CONSTEXPR const QColor kDefaultDarkGrayColor = { 169, 169, 169 }; // #A9A9A9
+//#endif // (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+		const QColor kDefaultWhiteColor = { 255, 255, 255 }; // #FFFFFF
+		const QColor kDefaultBlackColor = { 0, 0, 0 }; // #000000
+		const QColor kDefaultTransparentColor = { 0, 0, 0, 0 };
+		const QColor kDefaultLightGrayColor = { 211, 211, 211 }; // #D3D3D3
+		const QColor kDefaultDarkGrayColor = { 169, 169, 169 }; // #A9A9A9
 
-        Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor = { 240, 240, 240 }; // #F0F0F0
-        Q_COLOR_CONSTEXPR const QColor kDefaultSystemDarkColor = { 32, 32, 32 }; // #202020
-        Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorLight = { 110, 110, 110 }; // #6E6E6E
-        Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderActiveColorDark = { 51, 51, 51 }; // #333333
-        Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorLight = { 167, 167, 167 }; // #A7A7A7
-        Q_COLOR_CONSTEXPR const QColor kDefaultFrameBorderInactiveColorDark = { 61, 61, 62 }; // #3D3D3E
-        Q_COLOR_CONSTEXPR const QColor kDefaultSystemButtonBackgroundColor = { 204, 204, 204 }; // #CCCCCC
-        Q_COLOR_CONSTEXPR const QColor kDefaultSystemCloseButtonBackgroundColor = { 232, 17, 35 }; // #E81123
+		const QColor kDefaultSystemLightColor = { 240, 240, 240 }; // #F0F0F0
+        const QColor kDefaultSystemDarkColor = { 32, 32, 32 }; // #202020
+        const QColor kDefaultFrameBorderActiveColorLight = { 110, 110, 110 }; // #6E6E6E
+        const QColor kDefaultFrameBorderActiveColorDark = { 51, 51, 51 }; // #333333
+        const QColor kDefaultFrameBorderInactiveColorLight = { 167, 167, 167 }; // #A7A7A7
+        const QColor kDefaultFrameBorderInactiveColorDark = { 61, 61, 62 }; // #3D3D3E
+        const QColor kDefaultSystemButtonBackgroundColor = { 204, 204, 204 }; // #CCCCCC
+        const QColor kDefaultSystemCloseButtonBackgroundColor = { 232, 17, 35 }; // #E81123
 
         constexpr const char kDontOverrideCursorVar[] = "FRAMELESSHELPER_DONT_OVERRIDE_CURSOR";
         constexpr const char kDontToggleMaximizeVar[] = "FRAMELESSHELPER_DONT_TOGGLE_MAXIMIZE";
@@ -606,6 +611,8 @@ namespace PMSoft {
         {
             quint32 x = 0;
             quint32 y = 0;
+			Dpi() {}
+			Dpi(quint32 xx, quint32 yy) :x(xx), y(yy) {}
 
             friend constexpr bool operator==(const Dpi& lhs, const Dpi& rhs) noexcept
             {

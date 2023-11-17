@@ -71,9 +71,10 @@ struct FONT_ICON
 {
     quint32 SegoeUI = 0;
     quint32 Fallback = 0;
+	FONT_ICON(quint32 s, quint32 f) :SegoeUI(s), Fallback(f) {}
 };
 
-static constexpr const std::array<FONT_ICON, static_cast<int>(SystemButtonType::Last) + 1> g_fontIconsTable =
+static const std::array<FONT_ICON, static_cast<int>(SystemButtonType::Last) + 1> g_fontIconsTable =
 {
     FONT_ICON{ 0x0000, 0x0000 },
     FONT_ICON{ 0xE756, 0x0000 },

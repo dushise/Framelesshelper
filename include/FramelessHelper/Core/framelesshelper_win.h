@@ -44,7 +44,7 @@ public:
     static void addWindow(const QObject *window);
     static void removeWindow(const QObject *window);
 
-    Q_NODISCARD bool nativeEventFilter(const QByteArray &eventType, void *message, QT_NATIVE_EVENT_RESULT_TYPE *result) override;
+    bool nativeEventFilter(const QByteArray &eventType, void *message, QT_NATIVE_EVENT_RESULT_TYPE *result) override;
 };
 
 FRAMELESSHELPER_END_NAMESPACE

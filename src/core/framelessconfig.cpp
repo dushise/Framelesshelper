@@ -52,9 +52,10 @@ struct FramelessConfigEntry
 {
     const char *env = nullptr;
     const char *cfg = nullptr;
+	FramelessConfigEntry(const char* e, const char*c) :env(e), cfg(c) {}
 };
 
-static constexpr const std::array<FramelessConfigEntry, static_cast<int>(Option::Last) + 1> FramelessOptionsTable =
+static const std::array<FramelessConfigEntry, static_cast<int>(Option::Last) + 1> FramelessOptionsTable =
 {
     FramelessConfigEntry{ "FRAMELESSHELPER_USE_CROSS_PLATFORM_QT_IMPLEMENTATION", "Options/UseCrossPlatformQtImplementation" },
     FramelessConfigEntry{ "FRAMELESSHELPER_FORCE_HIDE_WINDOW_FRAME_BORDER", "Options/ForceHideWindowFrameBorder" },

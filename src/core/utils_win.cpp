@@ -241,6 +241,9 @@ struct Win32Message
     UINT Code = 0;
     LPCSTR Str = nullptr;
 
+	Win32Message() {}
+	Win32Message(UINT c, LPCSTR s) :Code(c), Str(s) {}
+
     friend inline constexpr bool operator==(const Win32Message &lhs, const Win32Message &rhs) noexcept
     {
         return (lhs.Code == rhs.Code);
@@ -273,7 +276,7 @@ struct Win32Message
 };
 
 #define DEFINE_WIN32_MESSAGE(Message) Win32Message{ Message, #Message },
-static constexpr const std::array<Win32Message, 333> g_win32MessageMap =
+static const std::array<Win32Message, 333> g_win32MessageMap =
 {
     DEFINE_WIN32_MESSAGE(WM_NULL)
     DEFINE_WIN32_MESSAGE(WM_CREATE)
@@ -844,8 +847,7 @@ static inline int getSystemMetrics2(const WId windowId, const int index, const b
     return std::round(qreal(::GetSystemMetrics(index)) / dpr);
 }
 
-static inline constexpr
-    DWORD qtEdgesToWin32Orientation(const Qt::Edges edges)
+static inline DWORD qtEdgesToWin32Orientation(const Qt::Edges edges)
 {
     if (edges == Qt::Edges{}) {
         return 0;
@@ -884,7 +886,7 @@ static inline QByteArray qtNativeEventType()
     return result;
 }
 
-static inline constexpr bool isNonClientMessage(const UINT message)
+static inline bool isNonClientMessage(const UINT message)
 {
     if (((message >= WM_NCCREATE) && (message <= WM_NCACTIVATE))
             || ((message >= WM_NCMOUSEMOVE) && (message <= WM_NCMBUTTONDBLCLK))
@@ -899,7 +901,7 @@ static inline constexpr bool isNonClientMessage(const UINT message)
     }
 }
 
-static inline constexpr bool isMouseMessage(const UINT message, bool *isNonClient = nullptr)
+static inline bool isMouseMessage(const UINT message, bool *isNonClient = nullptr)
 {
     if (((message >= WM_MOUSEFIRST) && (message <= WM_MOUSELAST))
             || ((message == WM_MOUSEHOVER) || (message == WM_MOUSELEAVE))) {
