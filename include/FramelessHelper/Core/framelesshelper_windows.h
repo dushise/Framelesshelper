@@ -1394,82 +1394,82 @@ constexpr const wchar_t kSystemLightThemeResourceName[] = L"Explorer";
 constexpr const wchar_t kDesktopRegistryKey[] = LR"(Control Panel\Desktop)";
 constexpr const wchar_t kDarkModePropertyName[] = L"UseImmersiveDarkModeColors";
 
-inline constexpr bool operator==(const POINT &lhs, const POINT &rhs) noexcept
+inline bool operator==(const POINT &lhs, const POINT &rhs) noexcept
 {
     return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
 }
 
-inline constexpr bool operator!=(const POINT &lhs, const POINT &rhs) noexcept
+inline bool operator!=(const POINT &lhs, const POINT &rhs) noexcept
 {
     return !operator==(lhs, rhs);
 }
 
-inline constexpr bool operator==(const SIZE &lhs, const SIZE &rhs) noexcept
+inline bool operator==(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return ((lhs.cx == rhs.cx) && (lhs.cy == rhs.cy));
 }
 
-inline constexpr bool operator!=(const SIZE &lhs, const SIZE &rhs) noexcept
+inline bool operator!=(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return !operator==(lhs, rhs);
 }
 
-inline constexpr bool operator>(const SIZE &lhs, const SIZE &rhs) noexcept
+inline bool operator>(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return ((lhs.cx * lhs.cy) > (rhs.cx * rhs.cy));
 }
 
-inline constexpr bool operator>=(const SIZE &lhs, const SIZE &rhs) noexcept
+inline bool operator>=(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return (operator>(lhs, rhs) || operator==(lhs, rhs));
 }
 
-inline constexpr bool operator<(const SIZE &lhs, const SIZE &rhs) noexcept
+inline bool operator<(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
 }
 
-inline constexpr bool operator<=(const SIZE &lhs, const SIZE &rhs) noexcept
+inline bool operator<=(const SIZE &lhs, const SIZE &rhs) noexcept
 {
     return (operator<(lhs, rhs) || operator==(lhs, rhs));
 }
 
-inline constexpr bool operator==(const RECT &lhs, const RECT &rhs) noexcept
+inline bool operator==(const RECT &lhs, const RECT &rhs) noexcept
 {
     return ((lhs.left == rhs.left) && (lhs.top == rhs.top) && (lhs.right == rhs.right) && (lhs.bottom == rhs.bottom));
 }
 
-inline constexpr bool operator!=(const RECT &lhs, const RECT &rhs) noexcept
+inline bool operator!=(const RECT &lhs, const RECT &rhs) noexcept
 {
     return !operator==(lhs, rhs);
 }
 
-inline constexpr QPoint point2qpoint(const POINT &point)
+inline QPoint point2qpoint(const POINT &point)
 {
     return QPoint{ int(point.x), int(point.y) };
 }
 
-inline constexpr POINT qpoint2point(const QPoint &point)
+inline POINT qpoint2point(const QPoint &point)
 {
     return POINT{ LONG(point.x()), LONG(point.y()) };
 }
 
-inline constexpr QSize size2qsize(const SIZE &size)
+inline QSize size2qsize(const SIZE &size)
 {
     return QSize{ int(size.cx), int(size.cy) };
 }
 
-inline constexpr SIZE qsize2size(const QSize &size)
+inline SIZE qsize2size(const QSize &size)
 {
     return SIZE{ LONG(size.width()), LONG(size.height()) };
 }
 
-inline constexpr QRect rect2qrect(const RECT &rect)
+inline QRect rect2qrect(const RECT &rect)
 {
     return QRect{ QPoint{ int(rect.left), int(rect.top) }, QSize{ int(RECT_WIDTH(rect)), int(RECT_HEIGHT(rect)) } };
 }
 
-inline constexpr RECT qrect2rect(const QRect &qrect)
+inline RECT qrect2rect(const QRect &qrect)
 {
     return RECT{ LONG(qrect.left()), LONG(qrect.top()), LONG(qrect.right()), LONG(qrect.bottom()) };
 }

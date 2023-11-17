@@ -138,7 +138,8 @@ QString SysApiLoader::generateUniqueKey(const QString &library, const QString &f
     }
     QString key = QDir::toNativeSeparators(library);
     // Remove path, only keep the file name.
-    if (const qsizetype lastSeparatorPos = key.lastIndexOf(QDir::separator()); lastSeparatorPos >= 0) {
+	const qsizetype lastSeparatorPos = key.lastIndexOf(QDir::separator());
+    if (lastSeparatorPos >= 0) {
         key.remove(0, lastSeparatorPos);
     }
 #ifdef Q_OS_WINDOWS

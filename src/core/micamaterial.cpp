@@ -64,17 +64,17 @@ static Q_LOGGING_CATEGORY(lcMicaMaterial, "wangwenx190.framelesshelper.core.mica
 
 using namespace Global;
 
-static constexpr const QSize kMaximumPictureSize = { 1920, 1080 };
-static constexpr const QImage::Format kDefaultImageFormat = QImage::Format_ARGB32_Premultiplied;
+const QSize kMaximumPictureSize = QSize( 1920, 1080 );
+const QImage::Format kDefaultImageFormat = QImage::Format_ARGB32_Premultiplied;
 
-static constexpr const qreal kDefaultTintOpacity = 0.7;
-static constexpr const qreal kDefaultNoiseOpacity = 0.04;
-static constexpr const qreal kDefaultBlurRadius = 128.0;
+static const qreal kDefaultTintOpacity = 0.7;
+static const qreal kDefaultNoiseOpacity = 0.04;
+static const qreal kDefaultBlurRadius = 128.0;
 
-static Q_COLOR_CONSTEXPR const QColor kDefaultSystemLightColor2 = {243, 243, 243}; // #F3F3F3
+static const QColor kDefaultSystemLightColor2 = {243, 243, 243}; // #F3F3F3
 
-static Q_COLOR_CONSTEXPR const QColor kDefaultFallbackColorDark = {44, 44, 44}; // #2C2C2C
-static Q_COLOR_CONSTEXPR const QColor kDefaultFallbackColorLight = {249, 249, 249}; // #F9F9F9
+static const QColor kDefaultFallbackColorDark = {44, 44, 44}; // #2C2C2C
+static const QColor kDefaultFallbackColorLight = {249, 249, 249}; // #F9F9F9
 
 struct ImageData
 {
@@ -89,11 +89,11 @@ Q_GLOBAL_STATIC(ImageData, g_imageData)
 
 #if FRAMELESSHELPER_CONFIG(private_qt)
 template<const int shift>
-static inline constexpr int qt_static_shift(const int value)
+static inline int qt_static_shift(const int value)
 {
-    if constexpr (shift == 0) {
+    if (shift == 0) {
         return value;
-    } else if constexpr (shift > 0) {
+    } else if (shift > 0) {
         return (value << (quint32(shift) & 0x1f));
     } else {
         return (value >> (quint32(-shift) & 0x1f));
@@ -545,7 +545,7 @@ void WallpaperThread::start()
         newSize.scale(wallpaperSize, mode);
         image = image.scaled(newSize);
     }
-    static constexpr const QPoint desktopOriginPoint = {0, 0};
+    static const QPoint desktopOriginPoint = {0, 0};
     const QRect desktopRect = {desktopOriginPoint, wallpaperSize};
     if (aspectStyle == WallpaperAspectStyle::Tile) {
         QPainter bufferPainter(&buffer);
@@ -924,7 +924,7 @@ void MicaMaterial::paint(QPainter *painter, const QRect &rect, const bool active
     }
     Q_D(MicaMaterial);
     d->prepareGraphicsResources();
-    static constexpr const auto originPoint = QPoint{ 0, 0 };
+    static const QPoint originPoint = QPoint{ 0, 0 };
     const QRect wallpaperRect = { originPoint, d->wallpaperSize };
     const QRect mappedRect = d->mapToWallpaper(rect);
     painter->save();
@@ -942,7 +942,7 @@ void MicaMaterial::paint(QPainter *painter, const QRect &rect, const bool active
         g_imageData()->mutex.unlock();
 #endif
         if (intersectedRect != mappedRect) {
-            static constexpr const auto xOffset = QPoint{ 1, 0 };
+            static const QPoint xOffset = QPoint{ 1, 0 };
             if (mappedRect.y() + mappedRect.height() <= wallpaperRect.height()) {
                 const QRect outerRect = { intersectedRect.topRight() + xOffset, QSize{ mappedRect.width() - intersectedRect.width(), intersectedRect.height() } };
                 const QPoint outerRectOriginPoint = originPoint + QPoint{ intersectedRect.width(), 0 } + xOffset;
@@ -952,7 +952,7 @@ void MicaMaterial::paint(QPainter *painter, const QRect &rect, const bool active
 #endif
                 painter->drawPixmap(outerRectOriginPoint, g_imageData()->blurredWallpaper, mappedOuterRect);
             } else {
-                static constexpr const auto yOffset = QPoint{ 0, 1 };
+                static const QPoint yOffset = QPoint{ 0, 1 };
                 const QRect outerRectBottom = { intersectedRect.bottomLeft() + yOffset, QSize{ intersectedRect.width(), mappedRect.height() - intersectedRect.height() } };
                 const QPoint outerRectBottomOriginPoint = originPoint + QPoint{ 0, intersectedRect.height() } + yOffset;
                 const QRect mappedOuterRectBottom = d->mapToWallpaper(outerRectBottom);

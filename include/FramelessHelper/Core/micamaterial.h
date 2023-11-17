@@ -46,19 +46,19 @@ public:
     explicit MicaMaterial(QObject *parent = nullptr);
     ~MicaMaterial() override;
 
-    Q_NODISCARD QColor tintColor() const;
+    QColor tintColor() const;
     void setTintColor(const QColor &value);
 
-    Q_NODISCARD qreal tintOpacity() const;
+    qreal tintOpacity() const;
     void setTintOpacity(const qreal value);
 
-    Q_NODISCARD QColor fallbackColor() const;
+    QColor fallbackColor() const;
     void setFallbackColor(const QColor &value);
 
-    Q_NODISCARD qreal noiseOpacity() const;
+    qreal noiseOpacity() const;
     void setNoiseOpacity(const qreal value);
 
-    Q_NODISCARD bool isFallbackEnabled() const;
+    bool isFallbackEnabled() const;
     void setFallbackEnabled(const bool value);
 
 public Q_SLOTS:

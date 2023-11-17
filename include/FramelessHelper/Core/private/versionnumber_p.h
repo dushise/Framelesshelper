@@ -36,19 +36,22 @@ struct VersionNumber
     unsigned long Patch = 0;
     unsigned long Tweak = 0;
 
-    friend constexpr bool operator==(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
-    {
-        return ((lhs.Major == rhs.Major) && (lhs.Minor == rhs.Minor) && (lhs.Patch == rhs.Patch) && (lhs.Tweak == rhs.Tweak));
-    }
+	VersionNumber(unsigned long maj, unsigned long min, unsigned long pat) :Major(maj), Minor(min), Patch(pat) {}
+	// 等于运算符
+	bool operator==(const VersionNumber &rhs) const noexcept
+	{
+		return ((Major == rhs.Major) && (Minor == rhs.Minor) && (Patch == rhs.Patch) && (Tweak == rhs.Tweak));
+	}
 
-    friend constexpr bool operator!=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
-    {
-        return !operator==(lhs, rhs);
-    }
+	// 不等于运算符
+	bool operator!=(const VersionNumber &rhs) const noexcept
+	{
+		return !operator==(rhs);
+	}
 
-    friend constexpr bool operator>(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend bool operator>(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
-        if (operator==(lhs, rhs)) {
+        if (lhs== rhs) {
             return false;
         }
         if (lhs.Major > rhs.Major) {
@@ -72,24 +75,24 @@ struct VersionNumber
         return (lhs.Tweak > rhs.Tweak);
     }
 
-    friend constexpr bool operator<(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend bool operator<(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
-        return (operator!=(lhs, rhs) && !operator>(lhs, rhs));
+        return ( (lhs!=rhs) && !operator>(lhs, rhs));
     }
 
-    friend constexpr bool operator>=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend bool operator>=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
-        return (operator>(lhs, rhs) || operator==(lhs, rhs));
+        return (operator>(lhs, rhs) || (lhs==rhs));
     }
 
-    friend constexpr bool operator<=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
+    friend bool operator<=(const VersionNumber &lhs, const VersionNumber &rhs) noexcept
     {
-        return (operator<(lhs, rhs) || operator==(lhs, rhs));
+        return (operator<(lhs, rhs) || (lhs==rhs));
     }
 };
 
 #ifdef Q_OS_WINDOWS
-constexpr const std::array<VersionNumber, static_cast<int>(Global::WindowsVersion::Latest) + 1> WindowsVersions =
+const std::array<VersionNumber, static_cast<int>(Global::WindowsVersion::Latest) + 1> WindowsVersions =
 {
     VersionNumber{  5, 0,  2195 }, // Windows 2000
     VersionNumber{  5, 1,  2600 }, // Windows XP
