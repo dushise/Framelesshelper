@@ -529,23 +529,6 @@ namespace PMSoft {
         };
         Q_ENUM_NS(WallpaperAspectStyle)
 
-#ifdef Q_OS_WINDOWS
-        enum class RegistryRootKey : quint8
-        {
-            ClassesRoot,
-            CurrentUser,
-            LocalMachine,
-            Users,
-            PerformanceData,
-            CurrentConfig,
-            DynData,
-            CurrentUserLocalSettings,
-            PerformanceText,
-            PerformanceNlsText
-        };
-        Q_ENUM_NS(RegistryRootKey)
-#endif // Q_OS_WINDOWS
-
         enum class WindowEdge : quint8
         {
             Left = 1 << 0,

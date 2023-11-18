@@ -1116,7 +1116,7 @@ bool Utils::isDwmCompositionEnabled()
         return true;
     }
     const auto resultFromRegistry = []() -> bool {
-        const RegistryKey registry(RegistryRootKey::CurrentUser, dwmRegistryKey());
+        const RegistryKey registry(RegistryKey::RegistryRootKey::CurrentUser, dwmRegistryKey());
         if (!registry.isValid()) {
             return false;
         }
@@ -1268,7 +1268,7 @@ QString Utils::getSystemErrorMessage(const QString &function)
 QColor Utils::getDwmColorizationColor(bool *opaque, bool *ok)
 {
     const auto resultFromRegistry = []() -> QColor {
-        const RegistryKey registry(RegistryRootKey::CurrentUser, dwmRegistryKey());
+        const RegistryKey registry(RegistryKey::RegistryRootKey::CurrentUser, dwmRegistryKey());
         if (!registry.isValid()) {
             return kDefaultDarkGrayColor;
         }
@@ -1309,9 +1309,9 @@ DwmColorizationArea Utils::getDwmColorizationArea()
     if (!WindowsVersionHelper::isWin10OrGreater()) {
         return DwmColorizationArea::None;
     }
-    const RegistryKey themeRegistry(RegistryRootKey::CurrentUser, personalizeRegistryKey());
+    const RegistryKey themeRegistry(RegistryKey::RegistryRootKey::CurrentUser, personalizeRegistryKey());
     const DWORD themeValue = themeRegistry.getValue<DWORD>(dwmColorKeyName(),0);
-    const RegistryKey dwmRegistry(RegistryRootKey::CurrentUser, dwmRegistryKey());
+    const RegistryKey dwmRegistry(RegistryKey::RegistryRootKey::CurrentUser, dwmRegistryKey());
     const DWORD dwmValue = dwmRegistry.getValue<DWORD>(dwmColorKeyName(),0);
     const bool theme = (themeValue != 0);
     const bool dwm = (dwmValue != 0);
@@ -2341,7 +2341,7 @@ bool Utils::shouldAppsUseDarkMode_windows()
         return (_ShouldAppsUseDarkMode() != FALSE);
     }
     const auto resultFromRegistry = []() -> bool {
-        const RegistryKey registry(RegistryRootKey::CurrentUser, personalizeRegistryKey());
+        const RegistryKey registry(RegistryKey::RegistryRootKey::CurrentUser, personalizeRegistryKey());
         if (!registry.isValid()) {
             return false;
         }
@@ -2649,7 +2649,7 @@ QColor Utils::getAccentColor_windows()
     // There's no Windows API to get this value, so we can only read it
     // directly from the registry.
     const QColor alternative = getDwmColorizationColor();
-    const RegistryKey registry(RegistryRootKey::CurrentUser, dwmRegistryKey());
+    const RegistryKey registry(RegistryKey::RegistryRootKey::CurrentUser, dwmRegistryKey());
     if (!registry.isValid()) {
         return alternative;
     }
@@ -2679,7 +2679,7 @@ QString Utils::getWallpaperFilePath()
 WallpaperAspectStyle Utils::getWallpaperAspectStyle()
 {
     static constexpr const auto defaultStyle = WallpaperAspectStyle::Fill;
-    const RegistryKey registry(RegistryRootKey::CurrentUser, desktopRegistryKey());
+    const RegistryKey registry(RegistryKey::RegistryRootKey::CurrentUser, desktopRegistryKey());
     if (!registry.isValid()) {
         return defaultStyle;
     }

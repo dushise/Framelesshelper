@@ -55,51 +55,66 @@ class QWinRegistryKey;
 class QSettings;
 QT_END_NAMESPACE
 
-FRAMELESSHELPER_BEGIN_NAMESPACE
-
-class FRAMELESSHELPER_CORE_API RegistryKey : public QObject
+namespace PMSoft
 {
-    FRAMELESSHELPER_QT_CLASS(RegistryKey)
-
-public:
-    explicit RegistryKey(const Global::RegistryRootKey root, const QString &key, QObject *parent = nullptr);
-    ~RegistryKey() override;
-
-    Q_NODISCARD Global::RegistryRootKey rootKey() const;
-    Q_NODISCARD QString subKey() const;
-
-    Q_NODISCARD bool isValid() const;
-
-    Q_NODISCARD QVariant value(const QString &name) const;
-    template<typename T>
-    QSharedPointer<T> value(const QString &name) const
+    class FRAMELESSHELPER_CORE_API RegistryKey : public QObject
     {
-        const QVariant var = value(name);
-        if (var.isValid() && !var.isNull()) {
-            return QSharedPointer<T>( new T( qvariant_cast<T>(var) ) );
+    public:
+		enum class RegistryRootKey : quint8
+		{
+			ClassesRoot,
+			CurrentUser,
+			LocalMachine,
+			Users,
+			PerformanceData,
+			CurrentConfig,
+			DynData,
+			CurrentUserLocalSettings,
+			PerformanceText,
+			PerformanceNlsText
+		};
+		Q_ENUM(RegistryRootKey)
+    public:
+        FRAMELESSHELPER_QT_CLASS(RegistryKey)	
+    public:
+        explicit RegistryKey(const RegistryRootKey root, const QString& key, QObject* parent = nullptr);
+        ~RegistryKey() override;
+
+        Q_NODISCARD RegistryRootKey rootKey() const;
+        Q_NODISCARD QString subKey() const;
+
+        Q_NODISCARD bool isValid() const;
+
+        Q_NODISCARD QVariant value(const QString& name) const;
+        template<typename T>
+        QSharedPointer<T> value(const QString& name) const
+        {
+            const QVariant var = value(name);
+            if (var.isValid() && !var.isNull()) {
+                return QSharedPointer<T>(new T(qvariant_cast<T>(var)));
+            }
+            return nullptr;
         }
-        return nullptr;
-    }
 
-    template<typename T>
-	T getValue(const QString& name,T def) const
-	{
-		const QVariant var = value(name);
-		if (var.isValid() && !var.isNull()) {
-			return qvariant_cast<T>(var);
-		}
-		return def;
-	}
-private:
-    Global::RegistryRootKey m_rootKey = Global::RegistryRootKey::CurrentUser;
-    QString m_subKey = {};
+        template<typename T>
+        T getValue(const QString& name, T def) const
+        {
+            const QVariant var = value(name);
+            if (var.isValid() && !var.isNull()) {
+                return qvariant_cast<T>(var);
+            }
+            return def;
+        }
+    private:
+        RegistryRootKey m_rootKey = RegistryRootKey::CurrentUser;
+        QString m_subKey = {};
 #if REGISTRYKEY_QWINREGISTRYKEY
-    std::unique_ptr<QWinRegistryKey> m_registryKey;
+        std::unique_ptr<QWinRegistryKey> m_registryKey;
 #else
-    std::unique_ptr<QSettings> m_settings;
+        std::unique_ptr<QSettings> m_settings;
 #endif
-};
+    };
 
-FRAMELESSHELPER_END_NAMESPACE
+}
 
 #endif // Q_OS_WINDOWS

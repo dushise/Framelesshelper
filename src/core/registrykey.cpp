@@ -35,8 +35,6 @@
 #  include <QtCore/qsettings.h>
 #endif
 
-FRAMELESSHELPER_BEGIN_NAMESPACE
-
 #if FRAMELESSHELPER_CONFIG(debug_output)
 static Q_LOGGING_CATEGORY(lcCoreRegistryKey, "framelesshelper.core.registrykey")
 #  define INFO qCInfo(lcCoreRegistryKey)
@@ -50,7 +48,7 @@ static Q_LOGGING_CATEGORY(lcCoreRegistryKey, "framelesshelper.core.registrykey")
 #  define CRITICAL QT_NO_QDEBUG_MACRO()
 #endif
 
-using namespace Global;
+using namespace PMSoft;
 
 static constexpr const std::array<ULONG_PTR, 10> g_registryKeyMap =
 {
@@ -109,7 +107,7 @@ RegistryKey::RegistryKey(const RegistryRootKey root, const QString &key, QObject
 
 RegistryKey::~RegistryKey() = default;
 
-RegistryRootKey RegistryKey::rootKey() const
+RegistryKey::RegistryRootKey RegistryKey::rootKey() const
 {
     return m_rootKey;
 }
@@ -153,7 +151,5 @@ QVariant RegistryKey::value(const QString &name) const
     return m_settings->value(name);
 #endif // REGISTRYKEY_QWINREGISTRYKEY
 }
-
-FRAMELESSHELPER_END_NAMESPACE
 
 #endif // Q_OS_WINDOWS
