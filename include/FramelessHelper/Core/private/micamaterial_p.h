@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <FramelessHelper/Core/framelesshelpercore_global.h>
+#include "framelesshelpercore_global.h"
 #include <QtGui/qbrush.h>
 #ifdef FRAMELESSHELPER_HAS_THREAD
 #  undef FRAMELESSHELPER_HAS_THREAD

@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <FramelessHelper/Core/framelesshelpercore_global.h>
+#include "framelesshelpercore_global.h"
 #include <QtCore/qabstractnativeeventfilter.h>
 
 #ifdef Q_OS_WINDOWS

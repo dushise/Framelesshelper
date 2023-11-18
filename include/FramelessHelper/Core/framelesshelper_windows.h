@@ -326,7 +326,7 @@
 #include <shellapi.h>
 #include <dwmapi.h>
 
-#include <FramelessHelper/Core/framelesshelpercore_global.h>
+#include "framelesshelpercore_global.h"
 
 #ifndef SC_SIZE
 #  define SC_SIZE (0xF000)

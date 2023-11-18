@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <FramelessHelper/Core/framelesshelpercore_global.h>
+#include "framelesshelpercore_global.h"
 #include <memory>
 
 #if FRAMELESSHELPER_CONFIG(mica_material)

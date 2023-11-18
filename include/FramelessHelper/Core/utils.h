@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <FramelessHelper/Core/framelesshelpercore_global.h>
+#include "framelesshelpercore_global.h"
 #if (defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID))
 #  include <FramelessHelper/Core/framelesshelper_linux.h>
 #endif // Q_OS_LINUX

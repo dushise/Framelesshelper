@@ -25,7 +25,8 @@ cd /d "%~dp0"
 if exist build.user.bat call build.user.bat
 if not defined CC set CC=cl.exe
 if not defined CXX set CXX=cl.exe
-if not defined QTDIR set QTDIR=%SystemDrive%\Qt\6.6.0\msvc2019_64
+rem if not defined QTDIR set QTDIR=%SystemDrive%\Qt\6.6.0\msvc2019_64
+if not defined QTDIR set QTDIR=%SystemDrive%\PM\dev_tools\Qt\Qt5.15.2\msvc2015_64
 echo CC=%CC%
 echo CXX=%CXX%
 echo QTDIR=%QTDIR%
