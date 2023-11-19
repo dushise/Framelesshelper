@@ -33,6 +33,7 @@ FRAMELESSHELPER_BEGIN_NAMESPACE
 class WindowBorderPainter;
 class FRAMELESSHELPER_CORE_API WindowBorderPainterPrivate : public QObject
 {
+    Q_OBJECT
     FRAMELESSHELPER_PRIVATE_QT_CLASS(WindowBorderPainter)
 
 public:

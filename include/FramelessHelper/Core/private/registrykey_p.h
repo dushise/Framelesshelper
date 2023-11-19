@@ -59,6 +59,8 @@ namespace PMSoft
 {
     class FRAMELESSHELPER_CORE_API RegistryKey : public QObject
     {
+        Q_OBJECT
+        FRAMELESSHELPER_QT_CLASS(RegistryKey)
     public:
 		enum class RegistryRootKey : quint8
 		{
@@ -74,8 +76,6 @@ namespace PMSoft
 			PerformanceNlsText
 		};
 		Q_ENUM(RegistryRootKey)
-    public:
-        FRAMELESSHELPER_QT_CLASS(RegistryKey)	
     public:
         explicit RegistryKey(const RegistryRootKey root, const QString& key, QObject* parent = nullptr);
         ~RegistryKey() override;

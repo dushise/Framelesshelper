@@ -35,6 +35,7 @@ using FramelessDataPtr = std::shared_ptr<FramelessData>;
 class FramelessManager;
 class FRAMELESSHELPER_CORE_API FramelessManagerPrivate : public QObject
 {
+    Q_OBJECT
     FRAMELESSHELPER_PRIVATE_QT_CLASS(FramelessManager)
 
 public:
@@ -74,6 +75,7 @@ public:
 
 class InternalEventFilter : public QObject
 {
+    Q_OBJECT
     FRAMELESSHELPER_QT_CLASS(InternalEventFilter)
 
 public:
